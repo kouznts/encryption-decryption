@@ -1,6 +1,6 @@
 package com.company.Encdec;
 
-public class ShiftEncdec implements Encdec {
+public class ShiftEncdecer implements Encdecer {
     private String alphabet = "abcdefghijklmnopqrstuvwxyz";
 
     public String enc(int key, String data) {

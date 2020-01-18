@@ -1,7 +1,7 @@
 package com.company;
 
-import com.company.Encdec.Encdecer;
-import com.company.Encdec.UnicodeEncdec;
+import com.company.Encdec.EncdecerStaticFactory;
+import com.company.Encdec.UnicodeEncdecer;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -57,12 +57,12 @@ public class Main {
             }
         }
 
-        Encdecer encdecer = new Encdecer();
-        encdecer.createInstance(new UnicodeEncdec());
+        EncdecerStaticFactory encdecerStaticFactory = new EncdecerStaticFactory();
+        encdecerStaticFactory.createInstance(new UnicodeEncdecer());
         if (mode.equals("enc"))
-            data = encdecer.enc(key, data);
+            data = encdecerStaticFactory.enc(key, data);
         else if ((mode.equals("dec")))
-            data = encdecer.dec(key, data);
+            data = encdecerStaticFactory.dec(key, data);
         else
             throw new UnsupportedOperationException();
 
