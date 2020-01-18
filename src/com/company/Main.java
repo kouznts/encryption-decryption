@@ -1,30 +1,40 @@
 package com.company;
 
-import java.util.Scanner;
-
 public class Main {
     public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
+        String mode = "enc";
+        int key = 0;
+        String data = "";
 
-        String targetOperation = in.nextLine();
-        String messageOrCyphertext = in.nextLine();
-        int key = in.nextInt();
+        for (int i = 0; i < args.length; i++) {
+            switch (args[i]) {
+                case "-mode":
+                    mode = args[++i];
+                    break;
+                case "-key":
+                    key = Integer.parseInt(args[++i]);
+                    break;
+                case "-data":
+                    data = args[++i];
+                    break;
+            }
+        }
 
-        messageOrCyphertext = encdec(targetOperation, messageOrCyphertext, key);
-        System.out.println(messageOrCyphertext);
+        data = encdec(mode, key, data);
+        System.out.println(data);
     }
 
-    private static String encdec(String targetOperation, String messageOrCyphertext, int key) {
-        if (targetOperation.equals("enc")) {
-        } else if (targetOperation.equals("dec")) {
+    private static String encdec(String mode, int key, String data) {
+        if (mode.equals("enc")) {
+        } else if (mode.equals("dec")) {
             key = -key;
         } else {
         }
 
         StringBuilder sb = new StringBuilder();
 
-        for (int i = 0; i < messageOrCyphertext.length(); i++) {
-            int currChar = messageOrCyphertext.charAt(i);
+        for (int i = 0; i < data.length(); i++) {
+            int currChar = data.charAt(i);
             currChar += key;
             sb.append((char) currChar);
         }
