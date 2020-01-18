@@ -54,7 +54,7 @@ public class Main {
             }
         }
 
-        UnicodeEncdecer encdecer = new UnicodeEncdecer();
+        UnicodeEncdec encdecer = new UnicodeEncdec();
         if (mode.equals("enc"))
             data = encdecer.enc(key, data);
         else if ((mode.equals("dec")))

@@ -1,6 +1,6 @@
 package com.company;
 
-public class UnicodeEncdecer implements Encdecer {
+public class UnicodeEncdec implements Encdec {
     public String enc(int key, String data) {
         StringBuilder sb = new StringBuilder();
 
