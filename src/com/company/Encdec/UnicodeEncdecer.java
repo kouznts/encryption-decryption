@@ -5,7 +5,7 @@ public class UnicodeEncdecer implements Encdecer {
         StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < data.length(); i++) {
-            final char newChar = (char)((int)data.charAt(i) + key);
+            final char newChar = (char) ((int) data.charAt(i) + key);
             sb.append(newChar);
         }
 

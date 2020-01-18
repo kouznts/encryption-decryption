@@ -9,26 +9,28 @@ public class ShiftEncdecer implements Encdecer {
         for (int i = 0; i < data.length(); i++) {
             char currChar = data.charAt(i);
 
-            if (Character.isLetter(currChar)) {
-                final boolean isUpperCaseLetter = Character.isUpperCase(currChar);
-                if (isUpperCaseLetter) {
-                    currChar = Character.toLowerCase(currChar);
-                }
-
-                int indexInAlphabet = findCharFirstOccurrenceIndexInAlphabet(currChar);
-
-                if (indexInAlphabet != -1) {
-                    int encryptedCharIndexInAlphabet = findCorrectNewIndex(indexInAlphabet, key, alphabet.length() - 1);
-                    currChar = alphabet.charAt(encryptedCharIndexInAlphabet);
-
-                    if (isUpperCaseLetter) {
-                        currChar = Character.toUpperCase(currChar);
-                    }
-                    sb.append(currChar);
-                    continue;
-                }
+            if (!Character.isLetter(currChar)) {
+                sb.append(currChar);
+                continue;
             }
 
+            final boolean isUpperCaseLetter = Character.isUpperCase(currChar);
+            if (isUpperCaseLetter)
+                currChar = Character.toLowerCase(currChar);
+
+            int indexInAlphabet = findCharFirstOccurrenceIndexInAlphabet(currChar);
+
+            if (indexInAlphabet == -1) {
+                sb.append(currChar);
+                continue;
+            }
+
+            int encryptedCharIndexInAlphabet = findCorrectNewIndex(indexInAlphabet, key, alphabet.length() - 1);
+            currChar = alphabet.charAt(encryptedCharIndexInAlphabet);
+
+            if (isUpperCaseLetter) {
+                currChar = Character.toUpperCase(currChar);
+            }
             sb.append(currChar);
         }
 
@@ -46,20 +48,28 @@ public class ShiftEncdecer implements Encdecer {
     }
 
     private int findCorrectNewIndex(int currIndex, int key, int lastIndex) {
-        while (key != 0) {
-            int temp = currIndex + 1;
-
-            if (temp == lastIndex + 1)
-                currIndex  = 0;
-            else if (temp == -1)
-                currIndex  = lastIndex;
-            else {
-                currIndex = temp;
+        if (key >= 0) {
+            while (key != 0) {
+                currIndex = setNewIndex(currIndex + 1, lastIndex);
+                key--;
             }
-
-            key--;
+        } else {
+            while (key != 0) {
+                currIndex = setNewIndex(currIndex - 1, lastIndex);
+                key++;
+            }
         }
 
         return currIndex;
+    }
+
+    private int setNewIndex(int currIndexPlusOne, int lastIndex) {
+        if (currIndexPlusOne == lastIndex + 1)
+            return 0;
+        else if (currIndexPlusOne == -1)
+            return lastIndex;
+        else {
+            return currIndexPlusOne;
+        }
     }
 }
