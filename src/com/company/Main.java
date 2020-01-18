@@ -1,6 +1,8 @@
 package com.company;
 
+import com.company.Encdec.Encdecer;
 import com.company.Encdec.EncdecerStaticFactory;
+import com.company.Encdec.ShiftEncdecer;
 import com.company.Encdec.UnicodeEncdecer;
 
 import java.io.File;
@@ -11,14 +13,27 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        String mode = "enc";
-        int key = 0;
-        String data = "";
+        String alg = "shift";
         String in = "";
+        String data = "AWelcome to hyperskill!";
+        String mode = "enc";
+        int key = 5;
         String out = "";
 
         for (int i = 0; i < args.length; i++) {
             switch (args[i]) {
+                case "-alg":
+                    alg = args[++i];
+                    break;
+
+                case "-in":
+                    in = args[++i];
+                    break;
+
+                case "-data":
+                    data = args[++i];
+                    break;
+
                 case "-mode":
                     mode = args[++i];
                     break;
@@ -27,19 +42,18 @@ public class Main {
                     key = Integer.parseInt(args[++i]);
                     break;
 
-                case "-data":
-                    data = args[++i];
-                    break;
-
-                case "-in":
-                    in = args[++i];
-                    break;
-
                 case "-out":
                     out = args[++i];
                     break;
             }
         }
+
+        if (alg.equals("shift")) {
+            alg = ShiftEncdecer.class.getName();
+        } else if (alg.equals("unicode")) {
+            alg = UnicodeEncdecer.class.getName();
+        }
+        Encdecer encdecer = EncdecerStaticFactory.newInstance(alg);
 
         if (!in.equals("") && data.equals("")) {
             try {
@@ -57,12 +71,10 @@ public class Main {
             }
         }
 
-        EncdecerStaticFactory encdecerStaticFactory = new EncdecerStaticFactory();
-        encdecerStaticFactory.createInstance(new UnicodeEncdecer());
         if (mode.equals("enc"))
-            data = encdecerStaticFactory.enc(key, data);
+            data = encdecer.enc(key, data);
         else if ((mode.equals("dec")))
-            data = encdecerStaticFactory.dec(key, data);
+            data = encdecer.dec(key, data);
         else
             throw new UnsupportedOperationException();
 
