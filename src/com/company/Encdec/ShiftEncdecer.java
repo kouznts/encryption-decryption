@@ -15,10 +15,10 @@ public class ShiftEncdecer implements Encdecer {
                     currChar = Character.toLowerCase(currChar);
                 }
 
-                int indexInAlphabet = findCharFirstOccurrenceIndexInAlphabet(data.charAt(i));
+                int indexInAlphabet = findCharFirstOccurrenceIndexInAlphabet(currChar);
 
                 if (indexInAlphabet != -1) {
-                    int encryptedCharIndexInAlphabet = findCorrectNewIndex(indexInAlphabet, key);
+                    int encryptedCharIndexInAlphabet = findCorrectNewIndex(indexInAlphabet, key, alphabet.length() - 1);
                     currChar = alphabet.charAt(encryptedCharIndexInAlphabet);
 
                     if (isUpperCaseLetter) {
@@ -45,14 +45,21 @@ public class ShiftEncdecer implements Encdecer {
         return -1;
     }
 
-    private int findCorrectNewIndex(int currIndex, int key) {
-        int newIndex = currIndex + key;
-        int lastIndex = alphabet.length() - 1;
+    private int findCorrectNewIndex(int currIndex, int key, int lastIndex) {
+        while (key != 0) {
+            int temp = currIndex + 1;
 
-        if (newIndex > lastIndex) {
-            return ((newIndex + 1) % alphabet.length()) - 1;
-        } else {
-            return newIndex;
+            if (temp == lastIndex + 1)
+                currIndex  = 0;
+            else if (temp == -1)
+                currIndex  = lastIndex;
+            else {
+                currIndex = temp;
+            }
+
+            key--;
         }
+
+        return currIndex;
     }
 }
