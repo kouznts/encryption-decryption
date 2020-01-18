@@ -2,6 +2,7 @@
   <dictionary name="user">
     <words>
       <w>encdec</w>
+      <w>encdecer</w>
     </words>
   </dictionary>
 </component>

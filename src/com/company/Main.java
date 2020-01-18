@@ -54,7 +54,13 @@ public class Main {
             }
         }
 
-        data = encdec(mode, key, data);
+        UnicodeEncdecer encdecer = new UnicodeEncdecer();
+        if (mode.equals("enc"))
+            data = encdecer.enc(key, data);
+        else if ((mode.equals("dec")))
+            data = encdecer.dec(key, data);
+        else
+            throw new UnsupportedOperationException();
 
         if (out.equals("")) {
             System.out.println(data);
@@ -68,23 +74,5 @@ public class Main {
                 e.printStackTrace();
             }
         }
-    }
-
-    private static String encdec(String mode, int key, String data) {
-        if (mode.equals("dec")) {
-            key = -key;
-        } else if (!mode.equals("enc")) {
-            throw new UnsupportedOperationException();
-        }
-
-        StringBuilder sb = new StringBuilder();
-
-        for (int i = 0; i < data.length(); i++) {
-            int currChar = data.charAt(i);
-            currChar += key;
-            sb.append((char) currChar);
-        }
-
-        return sb.toString();
     }
 }
