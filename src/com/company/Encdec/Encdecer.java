@@ -1,4 +1,6 @@
-package com.company;
+package com.company.Encdec;
+
+import com.company.Encdec.Encdec;
 
 public class Encdecer {
     private Encdec encdecer;

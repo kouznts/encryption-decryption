@@ -1,4 +1,6 @@
-package com.company;
+package com.company.Encdec;
+
+import com.company.Encdec.Encdec;
 
 public class UnicodeEncdec implements Encdec {
     public String enc(int key, String data) {

@@ -1,5 +1,8 @@
 package com.company;
 
+import com.company.Encdec.Encdecer;
+import com.company.Encdec.UnicodeEncdec;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -54,7 +57,8 @@ public class Main {
             }
         }
 
-        UnicodeEncdec encdecer = new UnicodeEncdec();
+        Encdecer encdecer = new Encdecer();
+        encdecer.createInstance(new UnicodeEncdec());
         if (mode.equals("enc"))
             data = encdecer.enc(key, data);
         else if ((mode.equals("dec")))

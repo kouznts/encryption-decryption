@@ -1,4 +1,4 @@
-package com.company;
+package com.company.Encdec;
 
 public interface Encdec {
     String enc(int key, String data);
