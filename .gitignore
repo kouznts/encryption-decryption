@@ -23,5 +23,6 @@
 hs_err_pid*
 
 Web Crawler/
-
 web-crawler/.idea/uiDesigner.xml
+web-crawler/.idea/dictionaries/user.xml
+*.kotlin_module
