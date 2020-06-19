@@ -18,6 +18,9 @@ public class WebCrawler extends JFrame {
     private final JButton runButton;
 
     public WebCrawler() {
+        FlowLayout flowLayout = new FlowLayout();
+        flowLayout.setAlignment(FlowLayout.LEFT);
+        setLayout(flowLayout);
 
         urlTextField = new JTextField();
         titleLabel = new JLabel();
@@ -29,8 +32,10 @@ public class WebCrawler extends JFrame {
         setHtmlTextArea();
         setBtnRun();
 
-        setPanel();
-        add(panel);
+        add(urlTextField, BorderLayout.CENTER);
+        add(runButton, BorderLayout.LINE_END);
+        add(titleLabel, BorderLayout.LINE_START);
+        add(htmlTextArea, BorderLayout.LINE_START);
 
         setWebCrawlerFrame();
     }
