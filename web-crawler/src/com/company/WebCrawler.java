@@ -7,16 +7,21 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class WebCrawler extends JFrame {
+    JTextField urlTextField;
+    JLabel titleLabel;
+    JTextArea htmlTextArea;
+    JButton runButton;
     JPanel panel;
-    JTextField tfUrl;
-    JButton btnRun;
-    JTextArea taHtml;
 
     public WebCrawler() {
-        setTfUrl();
-        setTaHtml();
+        setUrlTextField();
+        setTitleLabel();
+        setHtmlTextArea();
         setBtnRun();
 
         setPanel();
@@ -25,41 +30,52 @@ public class WebCrawler extends JFrame {
         setWebCrawlerFrame();
     }
 
-    private void setTfUrl() {
-        tfUrl = new JTextField();
-        tfUrl.setName("UrlTextField");
-        tfUrl.setPreferredSize(new Dimension(100, 30));
-        tfUrl.setVisible(true);
+    private void setUrlTextField() {
+        urlTextField = new JTextField();
+        urlTextField.setName("UrlTextField");
+        urlTextField.setPreferredSize(new Dimension(100, 30));
+        urlTextField.setVisible(true);
     }
 
-    private void setTaHtml() {
-        taHtml = new JTextArea("HTML code?");
-        taHtml.setName("HtmlTextArea");
-        taHtml.setPreferredSize(new Dimension(100, 100));
-        taHtml.setEnabled(false);
-        taHtml.setEditable(false);
-        taHtml.setHighlighter(null);
-        taHtml.setVisible(true);
+    private void setTitleLabel() {
+        titleLabel = new JLabel();
+        titleLabel.setName("TitleLabel");
+        titleLabel.setPreferredSize(new Dimension(100, 30));
+        titleLabel.setVisible(true);
+    }
+
+    private void setHtmlTextArea() {
+        htmlTextArea = new JTextArea("HTML code?");
+        htmlTextArea.setName("HtmlTextArea");
+        htmlTextArea.setPreferredSize(new Dimension(100, 100));
+        htmlTextArea.setEnabled(false);
+        htmlTextArea.setEditable(false);
+        htmlTextArea.setHighlighter(null);
+        htmlTextArea.setVisible(true);
     }
 
     private void setBtnRun() {
-        btnRun = new JButton();
-        btnRun.setName("RunButton");
-        btnRun.setPreferredSize(new Dimension(100, 100));
-        btnRun.setVisible(true);
+        runButton = new JButton();
+        runButton.setName("RunButton");
+        runButton.setPreferredSize(new Dimension(100, 100));
+        runButton.setVisible(true);
 
-        btnRun.addActionListener(ev ->
-                taHtml.setText(
-                        downloadWebpage(tfUrl.getText())));
+        runButton.addActionListener(ev -> {
+            htmlTextArea.setText(
+                    downloadWebpage(
+                            urlTextField.getText()));
+            titleLabel.setText(parseTaHtmlWebpageTitle());
+        });
     }
 
     private void setPanel() {
         panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setLayout(new GridLayout());
 
-        panel.add(tfUrl);
-        panel.add(taHtml);
-        panel.add(btnRun);
+        panel.add(urlTextField);
+        panel.add(titleLabel);
+        panel.add(htmlTextArea);
+        panel.add(runButton);
     }
 
     private void setWebCrawlerFrame() {
@@ -70,7 +86,6 @@ public class WebCrawler extends JFrame {
         setPreferredSize(new Dimension(500, 500));
         setVisible(true);
     }
-
 
     private String downloadWebpage(final String url) {
         String siteText = "";
@@ -98,7 +113,7 @@ public class WebCrawler extends JFrame {
         String webpageTitle = "";
         if (matcher.find()) {
             webpageTitle = matcher.group(2);
-}
+        }
 
         scanner.close();
         return webpageTitle;
