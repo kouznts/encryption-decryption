@@ -87,4 +87,20 @@ public class WebCrawler extends JFrame {
 
         return siteText;
     }
+
+    private String parseTaHtmlWebpageTitle() {
+        Scanner scanner = new Scanner(System.in);
+        String text = scanner.nextLine();
+
+        Pattern javaPattern = Pattern.compile("(.*?<title>)(.*?)(</title>.*)", Pattern.CASE_INSENSITIVE);
+        Matcher matcher = javaPattern.matcher(text);
+
+        String webpageTitle = "";
+        if (matcher.find()) {
+            webpageTitle = matcher.group(2);
+}
+
+        scanner.close();
+        return webpageTitle;
+    }
 }
