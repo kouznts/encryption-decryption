@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -65,10 +64,9 @@ public class WebCrawler extends JFrame {
         runButton.setVisible(true);
 
         runButton.addActionListener(ev -> {
-            htmlTextArea.setText(
-                    downloadWebpage(
-                            urlTextField.getText()));
-            titleLabel.setText(parseTaHtmlWebpageTitle());
+            htmlTextArea.setText(downloadWebpage(
+                    urlTextField.getText()));
+            titleLabel.setText(parseTaHtmlWebpageTitle(htmlTextArea.getText()));
         });
     }
 
@@ -97,19 +95,15 @@ public class WebCrawler extends JFrame {
         return siteText;
     }
 
-    private String parseTaHtmlWebpageTitle() {
-        Scanner scanner = new Scanner(System.in);
-        String text = scanner.nextLine();
-
+    private String parseTaHtmlWebpageTitle(String webpageHtml) {
         Pattern javaPattern = Pattern.compile("(.*?<title>)(.*?)(</title>.*)", Pattern.CASE_INSENSITIVE);
-        Matcher matcher = javaPattern.matcher(text);
+        Matcher matcher = javaPattern.matcher(webpageHtml);
 
         String webpageTitle = "";
         if (matcher.find()) {
             webpageTitle = matcher.group(2);
         }
 
-        scanner.close();
         return webpageTitle;
     }
 }
