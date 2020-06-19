@@ -12,12 +12,18 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class WebCrawler extends JFrame {
-    JTextField urlTextField;
-    JLabel titleLabel;
-    JTextArea htmlTextArea;
-    JButton runButton;
+    private final JTextField urlTextField;
+    private final JLabel titleLabel;
+    private final JTextArea htmlTextArea;
+    private final JButton runButton;
 
     public WebCrawler() {
+
+        urlTextField = new JTextField();
+        titleLabel = new JLabel();
+        htmlTextArea = new JTextArea();
+        runButton = new JButton("Parse");
+
         setUrlTextField();
         setTitleLabel();
         setHtmlTextArea();
@@ -30,21 +36,18 @@ public class WebCrawler extends JFrame {
     }
 
     private void setUrlTextField() {
-        urlTextField = new JTextField();
         urlTextField.setName("UrlTextField");
         urlTextField.setPreferredSize(new Dimension(100, 30));
         urlTextField.setVisible(true);
     }
 
     private void setTitleLabel() {
-        titleLabel = new JLabel();
         titleLabel.setName("TitleLabel");
         titleLabel.setPreferredSize(new Dimension(100, 30));
         titleLabel.setVisible(true);
     }
 
     private void setHtmlTextArea() {
-        htmlTextArea = new JTextArea("HTML code?");
         htmlTextArea.setName("HtmlTextArea");
         htmlTextArea.setPreferredSize(new Dimension(100, 100));
         htmlTextArea.setEnabled(false);
@@ -54,7 +57,6 @@ public class WebCrawler extends JFrame {
     }
 
     private void setBtnRun() {
-        runButton = new JButton();
         runButton.setName("RunButton");
         runButton.setPreferredSize(new Dimension(100, 100));
         runButton.setVisible(true);
