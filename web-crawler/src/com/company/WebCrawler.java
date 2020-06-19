@@ -16,7 +16,6 @@ public class WebCrawler extends JFrame {
     JLabel titleLabel;
     JTextArea htmlTextArea;
     JButton runButton;
-    JPanel panel;
 
     public WebCrawler() {
         setUrlTextField();
@@ -66,16 +65,6 @@ public class WebCrawler extends JFrame {
                             urlTextField.getText()));
             titleLabel.setText(parseTaHtmlWebpageTitle());
         });
-    }
-
-    private void setPanel() {
-        panel = new JPanel();
-        panel.setLayout(new GridLayout());
-
-        panel.add(urlTextField);
-        panel.add(titleLabel);
-        panel.add(htmlTextArea);
-        panel.add(runButton);
     }
 
     private void setWebCrawlerFrame() {
