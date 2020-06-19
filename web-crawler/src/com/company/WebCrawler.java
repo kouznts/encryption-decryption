@@ -42,28 +42,26 @@ public class WebCrawler extends JFrame {
 
     private void setUrlTextField() {
         urlTextField.setName("UrlTextField");
-        urlTextField.setPreferredSize(new Dimension(100, 30));
+        urlTextField.setPreferredSize(new Dimension(350, 25));
         urlTextField.setVisible(true);
     }
 
     private void setTitleLabel() {
         titleLabel.setName("TitleLabel");
-        titleLabel.setPreferredSize(new Dimension(100, 30));
+        titleLabel.setPreferredSize(new Dimension(500, 25));
         titleLabel.setVisible(true);
     }
 
     private void setHtmlTextArea() {
         htmlTextArea.setName("HtmlTextArea");
-        htmlTextArea.setPreferredSize(new Dimension(100, 100));
+        htmlTextArea.setPreferredSize(new Dimension(490, 320));
         htmlTextArea.setEnabled(false);
         htmlTextArea.setEditable(false);
-        htmlTextArea.setHighlighter(null);
         htmlTextArea.setVisible(true);
     }
 
     private void setBtnRun() {
         runButton.setName("RunButton");
-        runButton.setPreferredSize(new Dimension(100, 100));
         runButton.setVisible(true);
 
         runButton.addActionListener(ev -> {
