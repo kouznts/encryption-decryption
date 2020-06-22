@@ -2,16 +2,11 @@ package com.company;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.net.URLConnection;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
+import static com.company.WebCrawling.downloadWebpage;
+import static com.company.WebCrawling.parseWebpageTitle;
 
 public class WebCrawler extends JFrame {
     private final List<String> urls = new ArrayList<String>();
@@ -98,41 +93,5 @@ public class WebCrawler extends JFrame {
         setSize(500, 500);
         setPreferredSize(new Dimension(500, 500));
         setVisible(true);
-    }
-
-    private String downloadWebpage(final String url) {
-        String siteText = "";
-
-        try {
-            URLConnection urlConnection = new URL(url).openConnection();
-
-            if (urlConnection.getContentType().equals("text/html")) {
-                try (InputStream inputStream =
-                             new BufferedInputStream(
-                                     urlConnection.getInputStream())) {
-
-                    siteText =
-                            new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
-                } catch (IOException exc) {
-                    exc.printStackTrace();
-                }
-            }
-        } catch (IOException exc) {
-            exc.printStackTrace();
-        }
-
-        return siteText;
-    }
-
-    private String parseWebpageTitle(String webpageHtmlCode) {
-        Pattern javaPattern = Pattern.compile("(.*?<title>)(.*?)(</title>.*)", Pattern.CASE_INSENSITIVE);
-        Matcher matcher = javaPattern.matcher(webpageHtmlCode);
-
-        String webpageTitle = "";
-        if (matcher.find()) {
-            webpageTitle = matcher.group(2);
-        }
-
-        return webpageTitle;
     }
 }
