@@ -6,6 +6,7 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -82,12 +83,20 @@ public class WebCrawler extends JFrame {
     private String downloadWebpage(final String url) {
         String siteText = "";
 
-        try (InputStream inputStream =
-                     new BufferedInputStream(
-                             new URL(url).openStream())) {
+        try {
+            URLConnection urlConnection = new URL(url).openConnection();
 
-            siteText =
-                    new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
+            if (urlConnection.getContentType().equals("text/html")) {
+                try (InputStream inputStream =
+                             new BufferedInputStream(
+                                     urlConnection.getInputStream())) {
+
+                    siteText =
+                            new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
+                } catch (IOException exc) {
+                    exc.printStackTrace();
+                }
+            }
         } catch (IOException exc) {
             exc.printStackTrace();
         }
