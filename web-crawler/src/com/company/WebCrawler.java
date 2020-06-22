@@ -80,9 +80,14 @@ public class WebCrawler extends JFrame {
         runButton.setVisible(true);
 
         runButton.addActionListener(ev -> {
+            titleLabel.setText(
+                    parseWebpageTitle(
+                            urlTextField.getText()
+                    )
+            );
+
             titlesTable.setText(downloadWebpage(
                     urlTextField.getText()));
-            titleLabel.setText(parseTaHtmlWebpageTitle(titlesTable.getText()));
         });
     }
 
@@ -119,9 +124,9 @@ public class WebCrawler extends JFrame {
         return siteText;
     }
 
-    private String parseTaHtmlWebpageTitle(String webpageHtml) {
+    private String parseWebpageTitle(String webpageHtmlCode) {
         Pattern javaPattern = Pattern.compile("(.*?<title>)(.*?)(</title>.*)", Pattern.CASE_INSENSITIVE);
-        Matcher matcher = javaPattern.matcher(webpageHtml);
+        Matcher matcher = javaPattern.matcher(webpageHtmlCode);
 
         String webpageTitle = "";
         if (matcher.find()) {
