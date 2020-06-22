@@ -8,13 +8,20 @@ import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class WebCrawler extends JFrame {
+    private final List<String> urls = new ArrayList<String>();
+    private final List<String> titles = new ArrayList<String>();
+    private final WebCrawlerTableModel tableModel = new WebCrawlerTableModel(urls, titles);
+
     private final JTextField urlTextField;
     private final JLabel titleLabel;
-    private final JTextArea htmlTextArea;
+    private final JTable titlesTable;
+    private final JScrollPane scrollPane;
     private final JButton runButton;
 
     public WebCrawler() {
@@ -24,18 +31,19 @@ public class WebCrawler extends JFrame {
 
         urlTextField = new JTextField();
         titleLabel = new JLabel();
-        htmlTextArea = new JTextArea();
+        titlesTable = new JTable(tableModel);
+        scrollPane = new JScrollPane(titlesTable);
         runButton = new JButton("Parse");
 
         setUrlTextField();
         setTitleLabel();
-        setHtmlTextArea();
+        setTitlesTable();
         setBtnRun();
 
         add(urlTextField, BorderLayout.CENTER);
         add(runButton, BorderLayout.LINE_END);
         add(titleLabel, BorderLayout.LINE_START);
-        add(htmlTextArea, BorderLayout.LINE_START);
+        add(scrollPane, BorderLayout.LINE_START);
 
         setWebCrawlerFrame();
     }
@@ -52,12 +60,19 @@ public class WebCrawler extends JFrame {
         titleLabel.setVisible(true);
     }
 
-    private void setHtmlTextArea() {
-        htmlTextArea.setName("HtmlTextArea");
-        htmlTextArea.setPreferredSize(new Dimension(490, 320));
-        htmlTextArea.setEnabled(false);
-        htmlTextArea.setEditable(false);
-        htmlTextArea.setVisible(true);
+    private void setTitlesTable() {
+        titlesTable.setName("TitlesTable");
+        titlesTable.setPreferredSize(new Dimension(490, 320));
+        titlesTable.setEnabled(false);
+        titlesTable.setVisible(true);
+    }
+
+    private void setScrollPane() {
+        scrollPane.setHorizontalScrollBarPolicy(
+                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
+        scrollPane.setVerticalScrollBarPolicy(
+                ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
     }
 
     private void setBtnRun() {
@@ -65,9 +80,9 @@ public class WebCrawler extends JFrame {
         runButton.setVisible(true);
 
         runButton.addActionListener(ev -> {
-            htmlTextArea.setText(downloadWebpage(
+            titlesTable.setText(downloadWebpage(
                     urlTextField.getText()));
-            titleLabel.setText(parseTaHtmlWebpageTitle(htmlTextArea.getText()));
+            titleLabel.setText(parseTaHtmlWebpageTitle(titlesTable.getText()));
         });
     }
 
