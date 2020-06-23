@@ -37,4 +37,8 @@ public class WebCrawling {
 
         return webpageTitle;
     }
+
+    public List<String> parseWebpageLinks(String webpageHtmlCode) {
+        Pattern patternLinkTag = Pattern.compile("(?i)(<a.*?href=[\"'])(.*?)([\"'].*?>)(.*?)(</a>)");
+    }
 }
