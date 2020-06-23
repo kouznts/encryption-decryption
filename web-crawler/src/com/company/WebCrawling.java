@@ -91,4 +91,17 @@ public class WebCrawling {
         return urls;
     }
 
+    public static List<String> parseWebpagesTitles(final List<String> webpagesUrls) {
+        List<String> titles = new ArrayList<String>();
+
+        for (String url : webpagesUrls) {
+            titles.add(
+                    parseWebpageTitle(
+                            parseWebpageHtmlCode(url)
+                    )
+            );
+}
+
+        return titles;
+    }
 }
