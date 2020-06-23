@@ -53,7 +53,7 @@ public class WebCrawling {
     }
 
     public static List<String> parseWebpageLinks(final String webpageUrl) {
-        List<String> urls = new ArrayList<String>();
+        List<String> urls = new ArrayList<>();
 
         Pattern patternLinkTag = Pattern.compile("(?i)(<a.*?href=[\"'])(.*?)([\"'].*?>)(.*?)(</a>)");
         Matcher matcherWebpageHtmlCode = patternLinkTag.matcher(
@@ -93,7 +93,7 @@ public class WebCrawling {
     }
 
     public static List<String> parseWebpagesTitles(final List<String> webpagesUrls) {
-        List<String> titles = new ArrayList<String>();
+        List<String> titles = new ArrayList<>();
 
         for (String url : webpagesUrls) {
             titles.add(

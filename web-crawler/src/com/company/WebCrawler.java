@@ -8,8 +8,8 @@ import java.util.List;
 import static com.company.WebCrawling.*;
 
 public class WebCrawler extends JFrame {
-    private final List<String> urls = new ArrayList<String>();
-    private final List<String> titles = new ArrayList<String>();
+    private final List<String> urls = new ArrayList<>();
+    private final List<String> titles = new ArrayList<>();
     private final WebCrawlerTableModel tableModel = new WebCrawlerTableModel(urls, titles);
 
     private final JTextField urlTextField;
@@ -74,9 +74,7 @@ public class WebCrawler extends JFrame {
         runButton.setName("RunButton");
         runButton.setVisible(true);
 
-        runButton.addActionListener(ev -> {
-            startWebCrawling();
-        });
+        runButton.addActionListener(ev -> startWebCrawling());
     }
 
     private void setWebCrawlerFrame() {
