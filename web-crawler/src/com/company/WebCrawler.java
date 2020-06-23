@@ -102,7 +102,7 @@ public class WebCrawler extends JFrame {
         urls.addAll(parsedUrls);
 
         final List<String> parsedTitles = parseWebpagesTitles(urls);
-        urls.addAll(parsedTitles);
+        titles.addAll(parsedTitles);
 
         tableModel.fireTableDataChanged();
     }
