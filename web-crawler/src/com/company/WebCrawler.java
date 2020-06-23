@@ -5,7 +5,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.company.WebCrawling.downloadWebpage;
+import static com.company.WebCrawling.parseWebpageHtmlCode;
 import static com.company.WebCrawling.parseWebpageTitle;
 
 public class WebCrawler extends JFrame {
@@ -81,7 +81,8 @@ public class WebCrawler extends JFrame {
                     )
             );
 
-            titlesTable.setText(downloadWebpage(
+            urls.clear();
+            titlesTable.setText(parseWebpageHtmlCode(
                     urlTextField.getText()));
         });
     }

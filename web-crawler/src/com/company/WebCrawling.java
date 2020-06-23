@@ -12,12 +12,12 @@ import java.util.regex.Pattern;
 
 public class WebCrawling {
 
-    public static String downloadWebpage(final String url) {
+    public static String parseWebpageHtmlCode(final String webpageUrl) {
         String siteText = "";
 
         try (InputStream inputStream =
                      new BufferedInputStream(
-                             new URL(url).openStream())) {
+                             new URL(webpageUrl).openStream())) {
 
             siteText =
                     new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
@@ -44,7 +44,9 @@ public class WebCrawling {
         List<String> urls = new ArrayList<String>();
 
         Pattern patternLinkTag = Pattern.compile("(?i)(<a.*?href=[\"'])(.*?)([\"'].*?>)(.*?)(</a>)");
-        Matcher matcherWebpage = patternLinkTag.matcher(webpageHtmlCode);
+        Matcher matcherWebpageHtmlCode = patternLinkTag.matcher(
+                parseWebpageHtmlCode(webpageUrl)
+        );
 
         String parsedLink;
         while (matcherWebpage.find()) {
