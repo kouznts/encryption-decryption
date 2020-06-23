@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -38,7 +40,18 @@ public class WebCrawling {
         return webpageTitle;
     }
 
-    public List<String> parseWebpageLinks(String webpageHtmlCode) {
+    public static List<String> parseWebpageLinks(String webpageHtmlCode) {
+        List<String> urls = new ArrayList<String>();
+
         Pattern patternLinkTag = Pattern.compile("(?i)(<a.*?href=[\"'])(.*?)([\"'].*?>)(.*?)(</a>)");
+        Matcher matcherWebpage = patternLinkTag.matcher(webpageHtmlCode);
+
+        String parsedLink;
+        while (matcherWebpage.find()) {
+            parsedLink = matcherWebpage.group(2);
+            urls.add(parsedLink);
+        }
+
+        return urls;
     }
 }
