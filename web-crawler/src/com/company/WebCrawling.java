@@ -3,6 +3,7 @@ package com.company;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
@@ -25,13 +26,13 @@ public class WebCrawling {
                 return webpageHtmlCode;
             }
 
-        try (InputStream inputStream =
+            try (InputStream inputStream =
                          new BufferedInputStream(urlConnection.getInputStream())) {
 
                 webpageHtmlCode = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
-        } catch (IOException exc) {
-            exc.printStackTrace();
-        }
+            } catch (IOException exc) {
+                exc.printStackTrace();
+            }
         } catch (IOException exc) {
             exc.printStackTrace();
         }
@@ -39,7 +40,7 @@ public class WebCrawling {
         return webpageHtmlCode;
     }
 
-    public static String parseWebpageTitle(String webpageHtmlCode) {
+    public static String parseWebpageTitle(final String webpageHtmlCode) {
         Pattern javaPattern = Pattern.compile("(.*?<title>)(.*?)(</title>.*)", Pattern.CASE_INSENSITIVE);
         Matcher matcher = javaPattern.matcher(webpageHtmlCode);
 
@@ -51,7 +52,7 @@ public class WebCrawling {
         return webpageTitle;
     }
 
-    public static List<String> parseWebpageUrls(final String webpageUrl) {
+    public static List<String> parseWebpageLinks(final String webpageUrl) {
         List<String> urls = new ArrayList<String>();
 
         Pattern patternLinkTag = Pattern.compile("(?i)(<a.*?href=[\"'])(.*?)([\"'].*?>)(.*?)(</a>)");
@@ -82,7 +83,7 @@ public class WebCrawling {
                     parsedUrl.insert(0, webpageUrl);
                 } else {
                     parsedUrl.insert(0, webpageUrlBase);
-        }
+                }
             }
 
             urls.add(parsedUrl.toString());
@@ -100,7 +101,7 @@ public class WebCrawling {
                             parseWebpageHtmlCode(url)
                     )
             );
-}
+        }
 
         return titles;
     }

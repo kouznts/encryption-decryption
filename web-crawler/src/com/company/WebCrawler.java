@@ -5,8 +5,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.company.WebCrawling.parseWebpageHtmlCode;
-import static com.company.WebCrawling.parseWebpageTitle;
+import static com.company.WebCrawling.*;
 
 public class WebCrawler extends JFrame {
     private final List<String> urls = new ArrayList<String>();
@@ -33,6 +32,7 @@ public class WebCrawler extends JFrame {
         setUrlTextField();
         setTitleLabel();
         setTitlesTable();
+        setScrollPane();
         setBtnRun();
 
         add(urlTextField, BorderLayout.CENTER);
@@ -104,5 +104,5 @@ public class WebCrawler extends JFrame {
         urls.addAll(parsedTitles);
 
         tableModel.fireTableDataChanged();
-}
+    }
 }
