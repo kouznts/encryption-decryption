@@ -41,7 +41,7 @@ public class WebCrawling {
     }
 
     public static String parseWebpageTitle(final String webpageHtmlCode) {
-        Pattern javaPattern = Pattern.compile("(.*?<title>)(.*?)(</title>.*)", Pattern.CASE_INSENSITIVE);
+        Pattern javaPattern = Pattern.compile("(.*?<title>)(.*?)(</title>.*?)", Pattern.CASE_INSENSITIVE);
         Matcher matcher = javaPattern.matcher(webpageHtmlCode);
 
         String webpageTitle = "";
