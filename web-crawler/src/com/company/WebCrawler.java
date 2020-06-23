@@ -75,15 +75,7 @@ public class WebCrawler extends JFrame {
         runButton.setVisible(true);
 
         runButton.addActionListener(ev -> {
-            titleLabel.setText(
-                    parseWebpageTitle(
-                            urlTextField.getText()
-                    )
-            );
-
-            urls.clear();
-            titlesTable.setText(parseWebpageHtmlCode(
-                    urlTextField.getText()));
+            startWebCrawling();
         });
     }
 
@@ -95,4 +87,22 @@ public class WebCrawler extends JFrame {
         setPreferredSize(new Dimension(500, 500));
         setVisible(true);
     }
+
+    private void startWebCrawling() {
+        titleLabel.setText(
+                parseWebpageTitle(urlTextField.getText())
+        );
+
+        urls.clear();
+        titles.clear();
+        urls.add(urlTextField.getText());
+
+        final List<String> parsedUrls = parseWebpageLinks(urlTextField.getText());
+        urls.addAll(parsedUrls);
+
+        final List<String> parsedTitles = parseWebpagesTitles(urls);
+        urls.addAll(parsedTitles);
+
+        tableModel.fireTableDataChanged();
+}
 }
