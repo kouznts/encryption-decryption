@@ -27,10 +27,6 @@ public class WebCrawlerTableModel extends AbstractTableModel {
 
     @Override
     public String getValueAt(int row, int col) {
-        if (row < 0 || col < 0 || col > 1) {
-            throw new IndexOutOfBoundsException();
-        }
-
         return col == 0
                 ? urls.get(row)
                 : titles.get(row);
@@ -38,10 +34,6 @@ public class WebCrawlerTableModel extends AbstractTableModel {
 
     @Override
     public String getColumnName(int columnIndex) {
-        if (columnIndex < 0 || columnIndex > 1) {
-            throw new IndexOutOfBoundsException();
-        }
-
         return tableHeaders[columnIndex];
     }
 }
