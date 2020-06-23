@@ -90,7 +90,8 @@ public class WebCrawler extends JFrame {
 
     private void startWebCrawling() {
         titleLabel.setText(
-                parseWebpageTitle(urlTextField.getText())
+                parseWebpageTitle(
+                        parseWebpageHtmlCode(urlTextField.getText()))
         );
 
         urls.clear();
