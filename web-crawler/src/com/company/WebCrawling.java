@@ -4,6 +4,7 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,19 +14,29 @@ import java.util.regex.Pattern;
 public class WebCrawling {
 
     public static String parseWebpageHtmlCode(final String webpageUrl) {
-        String siteText = "";
+        String webpageHtmlCode = "Not Found";
+
+        try {
+            URLConnection urlConnection = new URL(webpageUrl).openConnection();
+
+            int responseCode = ((HttpURLConnection) urlConnection).getResponseCode();
+            if (responseCode == 404
+                    || !urlConnection.getContentType().startsWith("text/html")) {
+                return webpageHtmlCode;
+            }
 
         try (InputStream inputStream =
-                     new BufferedInputStream(
-                             new URL(webpageUrl).openStream())) {
+                         new BufferedInputStream(urlConnection.getInputStream())) {
 
-            siteText =
-                    new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
+                webpageHtmlCode = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
+        } catch (IOException exc) {
+            exc.printStackTrace();
+        }
         } catch (IOException exc) {
             exc.printStackTrace();
         }
 
-        return siteText;
+        return webpageHtmlCode;
     }
 
     public static String parseWebpageTitle(String webpageHtmlCode) {
