@@ -18,6 +18,7 @@ public class WebCrawler extends JFrame {
     private final JScrollPane scrollPane;
     private final JButton runButton;
     private final JTextField exportUrlTextField;
+    private final JButton exportButton;
 
     public WebCrawler() {
         FlowLayout flowLayout = new FlowLayout();
@@ -30,6 +31,7 @@ public class WebCrawler extends JFrame {
         scrollPane = new JScrollPane(titlesTable);
         runButton = new JButton("Parse");
         exportUrlTextField = new JTextField();
+        exportButton = new JButton("Export");
 
         setUrlTextField();
         setTitleLabel();
@@ -37,12 +39,14 @@ public class WebCrawler extends JFrame {
         setScrollPane();
         setRunButton();
         setExportUrlTextField();
+        setExportButton();
 
         add(urlTextField, BorderLayout.CENTER);
         add(runButton, BorderLayout.LINE_END);
         add(titleLabel, BorderLayout.LINE_START);
         add(scrollPane, BorderLayout.LINE_START);
         add(exportUrlTextField, BorderLayout.CENTER);
+        add(exportButton, BorderLayout.LINE_END);
 
         setWebCrawlerFrame();
     }
@@ -86,7 +90,11 @@ public class WebCrawler extends JFrame {
         exportUrlTextField.setVisible(true);
     }
 
+    private void setExportButton() {
+        exportButton.setName("ExportButton");
+        exportButton.setVisible(true);
 
+        exportButton.addActionListener(ev -> exportWebCrawling());
     }
 
     private void setWebCrawlerFrame() {
