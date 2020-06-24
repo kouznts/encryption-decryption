@@ -89,7 +89,8 @@ public class WebCrawler extends JFrame {
         runButton.setName("RunButton");
         runButton.setVisible(true);
 
-        runButton.addActionListener(ev -> startWebCrawling());
+        runButton.addActionListener(ev -> runWebCrawling());
+    }
 
     private void setExportUrlTextField() {
         exportUrlTextField.setName("ExportUrlTextField");
@@ -113,7 +114,7 @@ public class WebCrawler extends JFrame {
         setVisible(true);
     }
 
-    private void startWebCrawling() {
+    private void runWebCrawling() {
         titleLabel.setText(
                 parseWebpageTitle(
                         parseWebpageHtmlCode(urlTextField.getText()))
