@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
 public class WebCrawling {
 
     public static String parseWebpageHtmlCode(final String webpageUrl) {
-        String webpageHtmlCode = "Not Found";
+        String webpageHtmlCode = "";
 
         try {
             URLConnection urlConnection = new URL(webpageUrl).openConnection();
@@ -97,9 +97,7 @@ public class WebCrawling {
 
         for (String url : webpagesUrls) {
             titles.add(
-                    parseWebpageTitle(
-                            parseWebpageHtmlCode(url)
-                    )
+                    parseWebpageTitle(parseWebpageHtmlCode(url))
             );
         }
 
