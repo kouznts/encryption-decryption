@@ -93,7 +93,7 @@ public class WebCrawler extends JFrame {
         runButton.setName("RunButton");
         runButton.setVisible(true);
 
-        runButton.addActionListener(ev -> runWebCrawling());
+        runButton.addActionListener(ev -> clickRunButton());
     }
 
     private void setExportUrlTextField() {
@@ -118,23 +118,19 @@ public class WebCrawler extends JFrame {
         setVisible(true);
     }
 
-    private void runWebCrawling() {
+    private void clickRunButton() {
         titleLabel.setText(
-                parseWebpageTitle(
-                        parseWebpageHtmlCode(urlTextField.getText()))
+                parseWebpageTitle(parseWebpageHtmlCode(urlTextField.getText()))
         );
 
         urls.clear();
         titles.clear();
+
         urls.add(urlTextField.getText());
-
-        final List<String> parsedUrls = parseWebpageLinks(urlTextField.getText());
-        urls.addAll(parsedUrls);
-
-        final List<String> parsedTitles = parseWebpagesTitles(urls);
-        titles.addAll(parsedTitles);
-
+        urls.addAll(parseWebpageLinks(urlTextField.getText()));
+        titles.addAll(parseWebpagesTitles(urls));
         deleteUrlsWithoutTitles();
+
         tableModel.fireTableDataChanged();
     }
 
