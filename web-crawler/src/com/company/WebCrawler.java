@@ -34,7 +34,7 @@ public class WebCrawler extends JFrame {
         setFrameElements();
         addElementsToFrame();
 
-        setWebCrawlerFrame();
+        setFrame();
     }
 
     private void setFrameLayout() {
@@ -109,7 +109,7 @@ public class WebCrawler extends JFrame {
         exportButton.addActionListener(ev -> clickExportButton());
     }
 
-    private void setWebCrawlerFrame() {
+    private void setFrame() {
         setTitle("WebCrawler");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
