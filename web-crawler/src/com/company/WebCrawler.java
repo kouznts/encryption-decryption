@@ -33,6 +33,13 @@ public class WebCrawler extends JFrame {
         exportUrlTextField = new JTextField();
         exportButton = new JButton("Export");
 
+        setFrameElements();
+        addElementsToFrame();
+
+        setWebCrawlerFrame();
+    }
+
+    private void setFrameElements() {
         setUrlTextField();
         setTitleLabel();
         setTitlesTable();
@@ -40,15 +47,15 @@ public class WebCrawler extends JFrame {
         setRunButton();
         setExportUrlTextField();
         setExportButton();
+    }
 
+    private void addElementsToFrame() {
         add(urlTextField, BorderLayout.CENTER);
         add(runButton, BorderLayout.LINE_END);
         add(titleLabel, BorderLayout.LINE_START);
         add(scrollPane, BorderLayout.LINE_START);
         add(exportUrlTextField, BorderLayout.CENTER);
         add(exportButton, BorderLayout.LINE_END);
-
-        setWebCrawlerFrame();
     }
 
     private void setUrlTextField() {
