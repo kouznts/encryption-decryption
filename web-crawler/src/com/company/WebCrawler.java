@@ -33,7 +33,7 @@ public class WebCrawler extends JFrame {
         setTitleLabel();
         setTitlesTable();
         setScrollPane();
-        setBtnRun();
+        setRunButton();
 
         add(urlTextField, BorderLayout.CENTER);
         add(runButton, BorderLayout.LINE_END);
@@ -70,7 +70,7 @@ public class WebCrawler extends JFrame {
                 ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
     }
 
-    private void setBtnRun() {
+    private void setRunButton() {
         runButton.setName("RunButton");
         runButton.setVisible(true);
 
