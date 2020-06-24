@@ -113,8 +113,8 @@ public class WebCrawler extends JFrame {
         setTitle("WebCrawler");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        setSize(500, 500);
-        setPreferredSize(new Dimension(500, 500));
+        setSize(500, 600);
+        setPreferredSize(new Dimension(500, 600));
         setVisible(true);
     }
 
