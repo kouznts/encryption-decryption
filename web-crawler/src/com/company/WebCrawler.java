@@ -106,7 +106,7 @@ public class WebCrawler extends JFrame {
         exportButton.setName("ExportButton");
         exportButton.setVisible(true);
 
-        exportButton.addActionListener(ev -> exportWebCrawling());
+        exportButton.addActionListener(ev -> clickExportButton());
     }
 
     private void setWebCrawlerFrame() {
@@ -148,5 +148,11 @@ public class WebCrawler extends JFrame {
             urls.remove(deletingIndex);
             titles.remove(deletingIndex);
         }
+    }
+
+    private void clickExportButton() {
+        exportUrlsAndItsWebpagesTitles(
+                exportUrlTextField.getText(), urls, titles
+        );
     }
 }
