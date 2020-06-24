@@ -102,6 +102,23 @@ public class WebCrawler extends JFrame {
         final List<String> parsedTitles = parseWebpagesTitles(urls);
         titles.addAll(parsedTitles);
 
+        deleteUrlsWithoutTitles();
         tableModel.fireTableDataChanged();
+    }
+
+    private void deleteUrlsWithoutTitles() {
+        List<Integer> deletingUrlsIndexes = new ArrayList<>();
+
+        for (int i = 0; i < urls.size(); ++i) {
+            if (titles.get(i).equals("")) {
+                deletingUrlsIndexes.add(i);
+            }
+        }
+
+        for (int i = 0, deletingIndex; i < deletingUrlsIndexes.size(); ++i) {
+            deletingIndex = deletingUrlsIndexes.get(i);
+            urls.remove(deletingIndex);
+            titles.remove(deletingIndex);
+        }
     }
 }
