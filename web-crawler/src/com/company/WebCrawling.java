@@ -3,6 +3,7 @@ package com.company;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
@@ -104,5 +105,18 @@ public class WebCrawling {
         }
 
         return titles;
+    }
+
+    public static void exportUrlsAndItsWebpagesTitles(
+            final String exportFileName, final List<String> webpagesUrls, final List<String> webpagesTitles) {
+
+        try (PrintWriter fileWriter = new PrintWriter(exportFileName, StandardCharsets.UTF_8)) {
+            for (int i = 0; i < webpagesUrls.size(); i++) {
+                fileWriter.println(webpagesUrls.get(i));
+                fileWriter.println(webpagesTitles.get(i));
+            }
+        } catch (IOException exc) {
+            exc.printStackTrace();
+        }
     }
 }
