@@ -12,7 +12,9 @@ public class WebCrawler extends JFrame {
     private final List<String> titles = new ArrayList<>();
     private final WebCrawlerTableModel tableModel = new WebCrawlerTableModel(urls, titles);
 
+    private final JLabel urlLabel;
     private final JTextField urlTextField;
+
     private final JLabel titleLabel;
     private final JTable titlesTable;
     private final JScrollPane scrollPane;
@@ -23,7 +25,9 @@ public class WebCrawler extends JFrame {
     public WebCrawler() {
         setFrameLayout();
 
+        urlLabel = new JLabel("Start URL:");
         urlTextField = new JTextField();
+
         titleLabel = new JLabel();
         titlesTable = new JTable(tableModel);
         scrollPane = new JScrollPane(titlesTable);
@@ -54,8 +58,10 @@ public class WebCrawler extends JFrame {
     }
 
     private void addElementsToFrame() {
+        add(urlLabel, BorderLayout.LINE_START);
         add(urlTextField, BorderLayout.CENTER);
         add(runButton, BorderLayout.LINE_END);
+
         add(titleLabel, BorderLayout.LINE_START);
         add(scrollPane, BorderLayout.LINE_START);
         add(exportUrlTextField, BorderLayout.CENTER);
