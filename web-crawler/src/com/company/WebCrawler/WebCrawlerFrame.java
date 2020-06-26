@@ -1,13 +1,11 @@
 package com.company.WebCrawler;
 
-import com.company.WebCrawler.WebCrawlerTableModel;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.company.WebCrawling.*;
+import static com.company.WebCrawling.WebCrawling.*;
 
 public class WebCrawlerFrame extends JFrame {
     private final List<String> urls = new ArrayList<>();
