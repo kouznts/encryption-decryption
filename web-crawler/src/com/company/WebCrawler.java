@@ -15,6 +15,9 @@ public class WebCrawler extends JFrame {
     private final JLabel urlLabel;
     private final JTextField urlTextField;
 
+    private final JLabel threadsLabel;
+    private final JTextField threadsTextField;
+
     private final JLabel titleLabel;
     private final JTable titlesTable;
     private final JScrollPane scrollPane;
@@ -28,6 +31,9 @@ public class WebCrawler extends JFrame {
         urlLabel = new JLabel("Start URL:");
         urlTextField = new JTextField();
         runButton = new JToggleButton("Run");
+
+        threadsLabel = new JLabel("Threads:");
+        threadsTextField = new JTextField();
 
         titleLabel = new JLabel();
         titlesTable = new JTable(tableModel);
@@ -49,6 +55,8 @@ public class WebCrawler extends JFrame {
 
     private void setFrameElements() {
         setUrlTextField();
+        setThreadsTextField();
+
         setTitleLabel();
         setTitlesTable();
         setScrollPane();
@@ -62,6 +70,9 @@ public class WebCrawler extends JFrame {
         add(urlTextField, BorderLayout.CENTER);
         add(runButton, BorderLayout.LINE_END);
 
+        add(threadsLabel, BorderLayout.LINE_START);
+        add(threadsTextField, BorderLayout.CENTER);
+
         add(titleLabel, BorderLayout.LINE_START);
         add(scrollPane, BorderLayout.LINE_START);
         add(exportUrlTextField, BorderLayout.CENTER);
@@ -72,6 +83,12 @@ public class WebCrawler extends JFrame {
         urlTextField.setName("UrlTextField");
         urlTextField.setPreferredSize(new Dimension(350, 25));
         urlTextField.setVisible(true);
+    }
+
+    private void setThreadsTextField() {
+        threadsTextField.setName("ThreadsTextField");
+        threadsTextField.setPreferredSize(new Dimension(350, 25));
+        threadsTextField.setVisible(true);
     }
 
     private void setTitleLabel() {
