@@ -1,4 +1,6 @@
-package com.company;
+package com.company.WebCrawler;
+
+import com.company.WebCrawler.WebCrawlerTableModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -7,7 +9,7 @@ import java.util.List;
 
 import static com.company.WebCrawling.*;
 
-public class WebCrawler extends JFrame {
+public class WebCrawlerFrame extends JFrame {
     private final List<String> urls = new ArrayList<>();
     private final List<String> titles = new ArrayList<>();
 
@@ -26,7 +28,7 @@ public class WebCrawler extends JFrame {
     private final JTextField exportUrlTextField;
     private final JButton exportButton;
 
-    public WebCrawler() {
+    public WebCrawlerFrame() {
         setFrameLayout();
 
         urlLabel = new JLabel("Start URL:");
