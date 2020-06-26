@@ -10,7 +10,10 @@ import static com.company.WebCrawling.*;
 public class WebCrawler extends JFrame {
     private final List<String> urls = new ArrayList<>();
     private final List<String> titles = new ArrayList<>();
+    
     private final WebCrawlerTableModel tableModel = new WebCrawlerTableModel(urls, titles);
+    private final JTable urlsAndTitlesTable;
+    private final JScrollPane tableScrollPane;
 
     private final JLabel urlLabel;
     private final JTextField urlTextField;
@@ -19,8 +22,7 @@ public class WebCrawler extends JFrame {
     private final JTextField threadsTextField;
 
     private final JLabel titleLabel;
-    private final JTable titlesTable;
-    private final JScrollPane scrollPane;
+
     private final JToggleButton runButton;
     private final JTextField exportUrlTextField;
     private final JButton exportButton;
@@ -36,8 +38,8 @@ public class WebCrawler extends JFrame {
         threadsTextField = new JTextField();
 
         titleLabel = new JLabel();
-        titlesTable = new JTable(tableModel);
-        scrollPane = new JScrollPane(titlesTable);
+        urlsAndTitlesTable = new JTable(tableModel);
+        tableScrollPane = new JScrollPane(urlsAndTitlesTable);
         exportUrlTextField = new JTextField();
         exportButton = new JButton("Export");
 
@@ -58,8 +60,8 @@ public class WebCrawler extends JFrame {
         setThreadsTextField();
 
         setTitleLabel();
-        setTitlesTable();
-        setScrollPane();
+        setUrlsAndTitlesTable();
+        setTableScrollPane();
         setRunButton();
         setExportUrlTextField();
         setExportButton();
@@ -74,7 +76,7 @@ public class WebCrawler extends JFrame {
         add(threadsTextField, BorderLayout.CENTER);
 
         add(titleLabel, BorderLayout.LINE_START);
-        add(scrollPane, BorderLayout.LINE_START);
+        add(tableScrollPane, BorderLayout.LINE_START);
         add(exportUrlTextField, BorderLayout.CENTER);
         add(exportButton, BorderLayout.LINE_END);
     }
@@ -97,18 +99,18 @@ public class WebCrawler extends JFrame {
         titleLabel.setVisible(true);
     }
 
-    private void setTitlesTable() {
-        titlesTable.setName("TitlesTable");
-        titlesTable.setPreferredSize(new Dimension(490, 320));
-        titlesTable.setEnabled(false);
-        titlesTable.setVisible(true);
+    private void setUrlsAndTitlesTable() {
+        urlsAndTitlesTable.setName("TitlesTable");
+        urlsAndTitlesTable.setPreferredSize(new Dimension(490, 320));
+        urlsAndTitlesTable.setEnabled(false);
+        urlsAndTitlesTable.setVisible(true);
     }
 
-    private void setScrollPane() {
-        scrollPane.setHorizontalScrollBarPolicy(
+    private void setTableScrollPane() {
+        tableScrollPane.setHorizontalScrollBarPolicy(
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
-        scrollPane.setVerticalScrollBarPolicy(
+        tableScrollPane.setVerticalScrollBarPolicy(
                 ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
     }
 
