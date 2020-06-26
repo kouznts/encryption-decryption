@@ -18,7 +18,7 @@ public class WebCrawler extends JFrame {
     private final JLabel titleLabel;
     private final JTable titlesTable;
     private final JScrollPane scrollPane;
-    private final JButton runButton;
+    private final JToggleButton runButton;
     private final JTextField exportUrlTextField;
     private final JButton exportButton;
 
@@ -27,11 +27,11 @@ public class WebCrawler extends JFrame {
 
         urlLabel = new JLabel("Start URL:");
         urlTextField = new JTextField();
+        runButton = new JToggleButton("Run");
 
         titleLabel = new JLabel();
         titlesTable = new JTable(tableModel);
         scrollPane = new JScrollPane(titlesTable);
-        runButton = new JButton("Parse");
         exportUrlTextField = new JTextField();
         exportButton = new JButton("Export");
 
