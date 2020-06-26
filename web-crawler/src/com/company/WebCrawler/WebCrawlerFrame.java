@@ -153,25 +153,9 @@ public class WebCrawlerFrame extends JFrame {
         urls.add(urlTextField.getText());
         urls.addAll(parseWebpageLinks(urlTextField.getText()));
         titles.addAll(parseWebpagesTitles(urls));
-        deleteUrlsWithoutTitles();
+        deleteUrlsWithoutTitles(urls, titles);
 
         tableModel.fireTableDataChanged();
-    }
-
-    private void deleteUrlsWithoutTitles() {
-        List<Integer> deletingUrlsIndexes = new ArrayList<>();
-
-        for (int i = 0; i < urls.size(); ++i) {
-            if (titles.get(i).equals("")) {
-                deletingUrlsIndexes.add(i);
-            }
-        }
-
-        for (int i = 0, deletingIndex; i < deletingUrlsIndexes.size(); ++i) {
-            deletingIndex = deletingUrlsIndexes.get(i);
-            urls.remove(deletingIndex);
-            titles.remove(deletingIndex);
-        }
     }
 
     private void clickExportButton() {
