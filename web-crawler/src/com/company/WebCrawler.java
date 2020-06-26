@@ -10,18 +10,17 @@ import static com.company.WebCrawling.*;
 public class WebCrawler extends JFrame {
     private final List<String> urls = new ArrayList<>();
     private final List<String> titles = new ArrayList<>();
-    
+
     private final WebCrawlerTableModel tableModel = new WebCrawlerTableModel(urls, titles);
     private final JTable urlsAndTitlesTable;
     private final JScrollPane tableScrollPane;
 
     private final JLabel urlLabel;
     private final JTextField urlTextField;
+    private final JLabel urlTitleLabel;
 
     private final JLabel threadsLabel;
     private final JTextField threadsTextField;
-
-    private final JLabel titleLabel;
 
     private final JToggleButton runButton;
     private final JTextField exportUrlTextField;
@@ -37,7 +36,7 @@ public class WebCrawler extends JFrame {
         threadsLabel = new JLabel("Threads:");
         threadsTextField = new JTextField();
 
-        titleLabel = new JLabel();
+        urlTitleLabel = new JLabel();
         urlsAndTitlesTable = new JTable(tableModel);
         tableScrollPane = new JScrollPane(urlsAndTitlesTable);
         exportUrlTextField = new JTextField();
@@ -59,7 +58,7 @@ public class WebCrawler extends JFrame {
         setUrlTextField();
         setThreadsTextField();
 
-        setTitleLabel();
+        setUrlTitleLabel();
         setUrlsAndTitlesTable();
         setTableScrollPane();
         setRunButton();
@@ -75,7 +74,7 @@ public class WebCrawler extends JFrame {
         add(threadsLabel, BorderLayout.LINE_START);
         add(threadsTextField, BorderLayout.CENTER);
 
-        add(titleLabel, BorderLayout.LINE_START);
+        add(urlTitleLabel, BorderLayout.LINE_START);
         add(tableScrollPane, BorderLayout.LINE_START);
         add(exportUrlTextField, BorderLayout.CENTER);
         add(exportButton, BorderLayout.LINE_END);
@@ -93,10 +92,10 @@ public class WebCrawler extends JFrame {
         threadsTextField.setVisible(true);
     }
 
-    private void setTitleLabel() {
-        titleLabel.setName("TitleLabel");
-        titleLabel.setPreferredSize(new Dimension(500, 25));
-        titleLabel.setVisible(true);
+    private void setUrlTitleLabel() {
+        urlTitleLabel.setName("TitleLabel");
+        urlTitleLabel.setPreferredSize(new Dimension(500, 25));
+        urlTitleLabel.setVisible(true);
     }
 
     private void setUrlsAndTitlesTable() {
@@ -144,7 +143,7 @@ public class WebCrawler extends JFrame {
     }
 
     private void clickRunButton() {
-        titleLabel.setText(
+        urlTitleLabel.setText(
                 parseWebpageTitle(parseWebpageHtmlCode(urlTextField.getText()))
         );
 
