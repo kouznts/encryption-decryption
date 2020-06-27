@@ -56,16 +56,19 @@ public class WebCrawling {
     }
 
     public static List<String> parseWebpageLinks(final String webpageUrl) {
+        return parseWebpageLinksFromParsedCode(webpageUrl, parseWebpageHtmlCode(webpageUrl));
+    }
+
+    public static List<String> parseWebpageLinksFromParsedCode(
+            final String baseWebpageUrl, final String parsedWebpageCode) {
         List<String> urls = new ArrayList<>();
 
         Pattern patternLinkTag = Pattern.compile("(?i)(<a.*?href=[\"'])(.*?)([\"'].*?>)(.*?)(</a>)");
-        Matcher matcherWebpageHtmlCode = patternLinkTag.matcher(
-                parseWebpageHtmlCode(webpageUrl)
-        );
+        Matcher matcherWebpageHtmlCode = patternLinkTag.matcher(parsedWebpageCode);
 
-        String webpageUrlProtocol = webpageUrl.substring(0, webpageUrl.indexOf("//"));
+        String webpageUrlProtocol = baseWebpageUrl.substring(0, baseWebpageUrl.indexOf("//"));
 
-        Matcher matcherWebpageUrlBase = Pattern.compile("^.+/").matcher(webpageUrl);
+        Matcher matcherWebpageUrlBase = Pattern.compile("^.+/").matcher(baseWebpageUrl);
         String webpageUrlBase = "";
         if (matcherWebpageUrlBase.find()) {
             webpageUrlBase = matcherWebpageUrlBase.group();
@@ -83,7 +86,7 @@ public class WebCrawling {
                 if (parsedUrl.toString().startsWith("//")) {
                     parsedUrl.insert(0, webpageUrlProtocol);
                 } else if (parsedUrl.toString().startsWith("/")) {
-                    parsedUrl.insert(0, webpageUrl);
+                    parsedUrl.insert(0, baseWebpageUrl);
                 } else {
                     parsedUrl.insert(0, webpageUrlBase);
                 }
