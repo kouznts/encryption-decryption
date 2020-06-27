@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import static com.company.Webcrawling.parseLinks;
-import static com.company.Webcrawling.parseUrlsTitles;
+import static com.company.WebParsing.parseLinks;
+import static com.company.WebParsing.parseUrlsTitles;
 
 public class WebcrawlingModel extends AbstractTableModel {
 

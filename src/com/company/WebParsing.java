@@ -14,13 +14,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Webcrawling {
-
-    public static @NotNull void parseUrlsAndUrlsTitles(
-            final @NotNull List<String> urls, final @NotNull List<String> urlsTitles) {
-
-    }
-
+public class WebParsing {
     public static @NotNull String parseHtmlCode(final @NotNull String url) {
         String webpageHtmlCode = "";
 
@@ -67,8 +61,7 @@ public class Webcrawling {
         return webpageTitle;
     }
 
-    public static @NotNull
-    List<String> parseLinks(final @NotNull String url) {
+    public static @NotNull List<String> parseLinks(final @NotNull String url) {
         return parseLinksFromHtmlCode(url, parseHtmlCode(url));
     }
 

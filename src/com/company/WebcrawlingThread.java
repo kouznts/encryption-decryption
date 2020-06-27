@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Set;
 
-import static com.company.Webcrawling.*;
+import static com.company.WebParsing.*;
 
 public class WebcrawlingThread extends Thread {
     private final Queue<String> processingUrls;

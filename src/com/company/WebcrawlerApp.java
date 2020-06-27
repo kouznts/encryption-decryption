@@ -3,8 +3,8 @@ package com.company;
 import javax.swing.*;
 import java.awt.*;
 
-import static com.company.Webcrawling.parseHtmlCode;
-import static com.company.Webcrawling.parseTitleFromHtmlCode;
+import static com.company.WebParsing.parseHtmlCode;
+import static com.company.WebParsing.parseTitleFromHtmlCode;
 
 public class WebcrawlerApp extends JFrame {
 
