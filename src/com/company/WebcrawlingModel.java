@@ -1,4 +1,4 @@
-package com.company.Webcrawler;
+package com.company;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.List;

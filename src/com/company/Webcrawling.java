@@ -1,4 +1,4 @@
-package com.company.Webcrawler;
+package com.company;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Webrcrawler {
+public class Webcrawling {
 
     public static @NotNull void parseUrlsAndUrlsTitles(
             final @NotNull List<String> urls, final @NotNull List<String> urlsTitles) {

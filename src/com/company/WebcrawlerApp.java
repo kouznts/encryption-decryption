@@ -1,11 +1,9 @@
-package com.company.WebcrawlerApp;
-
-import com.company.Webcrawler.WebcrawlingModel;
+package com.company;
 
 import javax.swing.*;
 import java.awt.*;
 
-import static com.company.Webcrawler.Webrcrawler.*;
+import static com.company.Webcrawling.*;
 
 public class WebcrawlerApp extends JFrame {
 
@@ -158,6 +156,6 @@ public class WebcrawlerApp extends JFrame {
     private void clickExportButton() {
         exportUrlsAndTitles(
                 urls, urlsTitles, exportUrlTextField.getText()
-                );
+        );
     }
 }
