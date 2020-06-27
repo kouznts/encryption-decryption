@@ -10,7 +10,6 @@ import static com.company.Webcrawler.Webrcrawler.*;
 public class WebcrawlerApp extends JFrame {
 
     private final WebcrawlingModel model = new WebcrawlingModel();
-    private final WebcrawlerAppTableModel tableModel = new WebcrawlerAppTableModel(urls, urlsTitles);
     private final JTable table;
     private final JScrollPane tableScrollPane;
 
@@ -36,7 +35,7 @@ public class WebcrawlerApp extends JFrame {
         threadsTextField = new JTextField();
 
         urlTitleLabel = new JLabel();
-        table = new JTable(tableModel);
+        table = new JTable(model);
         tableScrollPane = new JScrollPane(table);
         exportUrlTextField = new JTextField();
         exportButton = new JButton("Export");
