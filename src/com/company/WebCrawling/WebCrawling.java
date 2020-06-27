@@ -107,7 +107,7 @@ public class WebCrawling {
         return urls;
     }
 
-    public static @NotNull List<String> parseTitles(final @NotNull List<String> urls) {
+    public static @NotNull List<String> parseUrlsTitles(final @NotNull List<String> urls) {
         List<String> titles = new ArrayList<>();
 
         for (String url : urls) {
@@ -120,24 +120,25 @@ public class WebCrawling {
     }
 
     public static void exportUrlsAndTitles(
-            final @NotNull String exportFileName,
-            final @NotNull List<String> urls, final @NotNull List<String> urlTitles) {
+            final @NotNull List<String> urls, final @NotNull List<String> urlsTitles,
+            final @NotNull String exportFileName) {
 
         try (PrintWriter fileWriter = new PrintWriter(exportFileName, StandardCharsets.UTF_8)) {
             for (int i = 0; i < urls.size(); i++) {
                 fileWriter.println(urls.get(i));
-                fileWriter.println(urlTitles.get(i));
+                fileWriter.println(urlsTitles.get(i));
             }
         } catch (IOException exc) {
             exc.printStackTrace();
         }
     }
 
-    public static void deleteUrlsWithoutTitles(final @NotNull List<String> urls, final @NotNull List<String> urlTitles) {
+    public static void deleteUrlsWithoutTitles(
+            final @NotNull List<String> urls, final @NotNull List<String> urlsTitles) {
         List<Integer> deletingUrlsIndexes = new ArrayList<>();
 
         for (int i = 0; i < urls.size(); ++i) {
-            if (urlTitles.get(i).equals("")) {
+            if (urlsTitles.get(i).equals("")) {
                 deletingUrlsIndexes.add(i);
             }
         }
@@ -145,7 +146,7 @@ public class WebCrawling {
         for (int i = 0, deletingIndex; i < deletingUrlsIndexes.size(); ++i) {
             deletingIndex = deletingUrlsIndexes.get(i);
             urls.remove(deletingIndex);
-            urlTitles.remove(deletingIndex);
+            urlsTitles.remove(deletingIndex);
         }
     }
 }

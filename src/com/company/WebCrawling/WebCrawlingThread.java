@@ -16,8 +16,9 @@ public class WebCrawlingThread extends Thread {
     private final List<String> urlsTitles;
 
     public WebCrawlingThread(
-            @NotNull final Queue<String> processingUrls, @NotNull final Set<String> processedUrls,
-            @NotNull final List<String> urls, @NotNull final List<String> urlsTitles) {
+            @NotNull final List<String> urls, @NotNull final List<String> urlsTitles,
+            @NotNull final Queue<String> processingUrls, @NotNull final Set<String> processedUrls) {
+
         this.processingUrls = processingUrls;
         this.processedUrls = processedUrls;
 
