@@ -143,14 +143,8 @@ public class WebcrawlerApp extends JFrame {
                 parseTitleFromHtmlCode(parseHtmlCode(urlTextField.getText()))
         );
 
-        model.Clear();
-
-        urls.add(urlTextField.getText());
-        urls.addAll(parseLinks(urlTextField.getText()));
-        urlsTitles.addAll(parseUrlsTitles(urls));
-        deleteUrlsWithoutTitles(urls, urlsTitles);
-
-        tableModel.fireTableDataChanged();
+        model.run(urlTextField.getText());
+        model.fireTableDataChanged();
     }
 
     private void clickExportButton() {

@@ -1,8 +1,12 @@
 package com.company;
 
+import org.jetbrains.annotations.NotNull;
+
 import javax.swing.table.AbstractTableModel;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+
+import static com.company.Webcrawling.*;
 
 public class WebcrawlingModel extends AbstractTableModel {
 
@@ -38,7 +42,17 @@ public class WebcrawlingModel extends AbstractTableModel {
         return tableHeaders[columnIndex];
     }
 
-    public void Clear() {
+    public void run(final @NotNull String startUrl) {
+        clear();
+
+        urls.add(startUrl);
+        urls.addAll(parseLinks(startUrl));
+        urlsTitles.addAll(parseUrlsTitles(urls));
+
+        deleteUrlsWithoutTitles(urls, urlsTitles);
+    }
+
+    private void clear() {
         urls.clear();
         urlsTitles.clear();
     }
