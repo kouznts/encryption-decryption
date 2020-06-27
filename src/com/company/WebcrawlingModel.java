@@ -3,10 +3,15 @@ package com.company;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.table.AbstractTableModel;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import static com.company.Webcrawling.*;
+import static com.company.Webcrawling.parseLinks;
+import static com.company.Webcrawling.parseUrlsTitles;
 
 public class WebcrawlingModel extends AbstractTableModel {
 
@@ -63,7 +68,7 @@ public class WebcrawlingModel extends AbstractTableModel {
         for (int i = 0; i < urls.size(); ++i) {
             if (urlsTitles.get(i).equals("")) {
                 removingUrlsIndexes.add(i);
-}
+            }
         }
 
         for (int i = 0, deletingIndex; i < removingUrlsIndexes.size(); ++i) {
@@ -72,3 +77,15 @@ public class WebcrawlingModel extends AbstractTableModel {
             urlsTitles.remove(deletingIndex);
         }
     }
+
+    public void export(final @NotNull String exportFileName) {
+        try (PrintWriter fileWriter = new PrintWriter(exportFileName, StandardCharsets.UTF_8)) {
+            for (int i = 0; i < urls.size(); i++) {
+                fileWriter.println(urls.get(i));
+                fileWriter.println(urlsTitles.get(i));
+            }
+        } catch (IOException exc) {
+            exc.printStackTrace();
+        }
+    }
+}

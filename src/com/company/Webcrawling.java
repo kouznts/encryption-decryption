@@ -5,7 +5,6 @@ import org.jetbrains.annotations.NotNull;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
@@ -122,19 +121,5 @@ public class Webcrawling {
         }
 
         return titles;
-    }
-
-    public static void exportUrlsAndTitles(
-            final @NotNull List<String> urls, final @NotNull List<String> urlsTitles,
-            final @NotNull String exportFileName) {
-
-        try (PrintWriter fileWriter = new PrintWriter(exportFileName, StandardCharsets.UTF_8)) {
-            for (int i = 0; i < urls.size(); i++) {
-                fileWriter.println(urls.get(i));
-                fileWriter.println(urlsTitles.get(i));
-            }
-        } catch (IOException exc) {
-            exc.printStackTrace();
-        }
     }
 }

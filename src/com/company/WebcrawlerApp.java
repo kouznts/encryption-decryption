@@ -3,7 +3,8 @@ package com.company;
 import javax.swing.*;
 import java.awt.*;
 
-import static com.company.Webcrawling.*;
+import static com.company.Webcrawling.parseHtmlCode;
+import static com.company.Webcrawling.parseTitleFromHtmlCode;
 
 public class WebcrawlerApp extends JFrame {
 
@@ -148,8 +149,6 @@ public class WebcrawlerApp extends JFrame {
     }
 
     private void clickExportButton() {
-        exportUrlsAndTitles(
-                urls, urlsTitles, exportUrlTextField.getText()
-        );
+        model.export(exportUrlTextField.getText());
     }
 }
