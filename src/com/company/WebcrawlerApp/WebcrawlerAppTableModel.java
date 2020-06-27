@@ -3,13 +3,13 @@ package com.company.WebcrawlerApp;
 import javax.swing.table.AbstractTableModel;
 import java.util.List;
 
-public class WebcrawlerTableModel extends AbstractTableModel {
+public class WebcrawlerAppTableModel extends AbstractTableModel {
 
     private final String[] tableHeaders = {"URL", "Title"};
     private final List<String> urls;
     private final List<String> titles;
 
-    public WebcrawlerTableModel(List<String> urls, List<String> titles) {
+    public WebcrawlerAppTableModel(List<String> urls, List<String> titles) {
         super();
         this.urls = urls;
         this.titles = titles;

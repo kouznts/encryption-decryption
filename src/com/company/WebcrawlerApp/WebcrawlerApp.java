@@ -11,7 +11,7 @@ public class WebcrawlerApp extends JFrame {
     private final List<String> urls = new CopyOnWriteArrayList<>();
     private final List<String> urlsTitles = new CopyOnWriteArrayList<>();
 
-    private final WebcrawlerTableModel tableModel = new WebcrawlerTableModel(urls, urlsTitles);
+    private final WebcrawlerAppTableModel tableModel = new WebcrawlerAppTableModel(urls, urlsTitles);
     private final JTable table;
     private final JScrollPane tableScrollPane;
 
