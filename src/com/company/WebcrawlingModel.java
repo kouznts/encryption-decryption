@@ -49,11 +49,26 @@ public class WebcrawlingModel extends AbstractTableModel {
         urls.addAll(parseLinks(startUrl));
         urlsTitles.addAll(parseUrlsTitles(urls));
 
-        deleteUrlsWithoutTitles(urls, urlsTitles);
+        removeUrlsWithoutTitles();
     }
 
     private void clear() {
         urls.clear();
         urlsTitles.clear();
     }
+
+    private void removeUrlsWithoutTitles() {
+        List<Integer> removingUrlsIndexes = new ArrayList<>();
+
+        for (int i = 0; i < urls.size(); ++i) {
+            if (urlsTitles.get(i).equals("")) {
+                removingUrlsIndexes.add(i);
 }
+        }
+
+        for (int i = 0, deletingIndex; i < removingUrlsIndexes.size(); ++i) {
+            deletingIndex = removingUrlsIndexes.get(i);
+            urls.remove(deletingIndex);
+            urlsTitles.remove(deletingIndex);
+        }
+    }

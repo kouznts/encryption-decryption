@@ -137,21 +137,4 @@ public class Webcrawling {
             exc.printStackTrace();
         }
     }
-
-    public static void deleteUrlsWithoutTitles(
-            final @NotNull List<String> urls, final @NotNull List<String> urlsTitles) {
-        List<Integer> deletingUrlsIndexes = new ArrayList<>();
-
-        for (int i = 0; i < urls.size(); ++i) {
-            if (urlsTitles.get(i).equals("")) {
-                deletingUrlsIndexes.add(i);
-            }
-        }
-
-        for (int i = 0, deletingIndex; i < deletingUrlsIndexes.size(); ++i) {
-            deletingIndex = deletingUrlsIndexes.get(i);
-            urls.remove(deletingIndex);
-            urlsTitles.remove(deletingIndex);
-        }
-    }
 }
