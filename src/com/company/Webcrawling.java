@@ -13,13 +13,13 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import static com.company.WebParsing.parseLinks;
 import static com.company.WebParsing.parseUrlsTitles;
 
-public class WebcrawlingModel extends AbstractTableModel {
+public class Webcrawling extends AbstractTableModel {
 
     private final String[] tableHeaders = {"URL", "Title"};
     private final List<String> urls;
     private final List<String> urlsTitles;
 
-    public WebcrawlingModel() {
+    public Webcrawling() {
         super();
         urls = new CopyOnWriteArrayList<>();
         urlsTitles = new CopyOnWriteArrayList<>();

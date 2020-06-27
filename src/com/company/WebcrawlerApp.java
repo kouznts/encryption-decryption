@@ -8,7 +8,7 @@ import static com.company.WebParsing.parseTitleFromHtmlCode;
 
 public class WebcrawlerApp extends JFrame {
 
-    private final WebcrawlingModel model = new WebcrawlingModel();
+    private final Webcrawling model = new Webcrawling();
     private final JTable table;
     private final JScrollPane tableScrollPane;
 
