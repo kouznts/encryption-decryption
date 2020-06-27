@@ -2,14 +2,14 @@ package com.company.WebCrawler;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import static com.company.WebCrawling.WebCrawling.*;
 
 public class WebCrawlerFrame extends JFrame {
-    private final List<String> urls = new ArrayList<>();
-    private final List<String> titles = new ArrayList<>();
+    private final List<String> urls = new CopyOnWriteArrayList<>();
+    private final List<String> titles = new CopyOnWriteArrayList<>();
 
     private final WebCrawlerTableModel tableModel = new WebCrawlerTableModel(urls, titles);
     private final JTable urlsAndTitlesTable;
