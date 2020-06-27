@@ -1,5 +1,7 @@
 package com.company.WebCrawling;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,7 +17,7 @@ import java.util.regex.Pattern;
 
 public class WebCrawling {
 
-    public static String parseHtmlCode(final String url) {
+    public static String parseHtmlCode(final @NotNull String url) {
         String webpageHtmlCode = "";
 
         try {
@@ -43,7 +45,7 @@ public class WebCrawling {
         return webpageHtmlCode;
     }
 
-    public static String parseTitleFromHtmlCode(final String code) {
+    public static String parseTitleFromHtmlCode(final @NotNull String code) {
         Pattern javaPattern = Pattern.compile("(.*?<title>)(.*?)(</title>.*?)", Pattern.CASE_INSENSITIVE);
         Matcher matcher = javaPattern.matcher(code);
 
@@ -55,12 +57,13 @@ public class WebCrawling {
         return webpageTitle;
     }
 
-    public static List<String> parseLinks(final String url) {
+    public static @NotNull
+    List<String> parseLinks(final @NotNull String url) {
         return parseLinksFromHtmlCode(url, parseHtmlCode(url));
     }
 
-    public static List<String> parseLinksFromHtmlCode(
-            final String baseUrl, final String code) {
+    public static @NotNull List<String> parseLinksFromHtmlCode(
+            final @NotNull String baseUrl, final @NotNull String code) {
         List<String> urls = new ArrayList<>();
 
         Pattern patternLinkTag = Pattern.compile("(?i)(<a.*?href=[\"'])(.*?)([\"'].*?>)(.*?)(</a>)");
@@ -98,7 +101,7 @@ public class WebCrawling {
         return urls;
     }
 
-    public static List<String> parseTitles(final List<String> urls) {
+    public static @NotNull List<String> parseTitles(final @NotNull List<String> urls) {
         List<String> titles = new ArrayList<>();
 
         for (String url : urls) {
@@ -111,7 +114,7 @@ public class WebCrawling {
     }
 
     public static void exportUrlsAndTitles(
-            final String exportFileName, final List<String> urls, final List<String> titles) {
+            final @NotNull String exportFileName, final @NotNull List<String> urls, final @NotNull List<String> titles) {
 
         try (PrintWriter fileWriter = new PrintWriter(exportFileName, StandardCharsets.UTF_8)) {
             for (int i = 0; i < urls.size(); i++) {
@@ -123,7 +126,7 @@ public class WebCrawling {
         }
     }
 
-    public static void deleteUrlsWithoutTitles(final List<String> urls, final List<String> titles) {
+    public static void deleteUrlsWithoutTitles(final @NotNull List<String> urls, final @NotNull List<String> titles) {
         List<Integer> deletingUrlsIndexes = new ArrayList<>();
 
         for (int i = 0; i < urls.size(); ++i) {
