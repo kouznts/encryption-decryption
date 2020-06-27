@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
 
 public class WebCrawling {
 
-    public static String parseHtmlCode(final @NotNull String url) {
+    public static @NotNull String parseHtmlCode(final @NotNull String url) {
         String webpageHtmlCode = "";
 
         try {
@@ -45,7 +45,13 @@ public class WebCrawling {
         return webpageHtmlCode;
     }
 
-    public static String parseTitleFromHtmlCode(final @NotNull String code) {
+    public static @NotNull String parseTitle(final @NotNull String url) {
+        return parseTitleFromHtmlCode(
+                parseHtmlCode(url)
+        );
+    }
+
+    public static @NotNull String parseTitleFromHtmlCode(final @NotNull String code) {
         Pattern javaPattern = Pattern.compile("(.*?<title>)(.*?)(</title>.*?)", Pattern.CASE_INSENSITIVE);
         Matcher matcher = javaPattern.matcher(code);
 
