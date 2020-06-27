@@ -144,22 +144,22 @@ public class WebCrawlerFrame extends JFrame {
 
     private void clickRunButton() {
         urlTitleLabel.setText(
-                parseWebpageTitle(parseWebpageHtmlCode(urlTextField.getText()))
+                parseTitleFromHtmlCode(parseHtmlCode(urlTextField.getText()))
         );
 
         urls.clear();
         titles.clear();
 
         urls.add(urlTextField.getText());
-        urls.addAll(parseWebpageLinks(urlTextField.getText()));
-        titles.addAll(parseWebpagesTitles(urls));
+        urls.addAll(parseLinks(urlTextField.getText()));
+        titles.addAll(parseTitles(urls));
         deleteUrlsWithoutTitles(urls, titles);
 
         tableModel.fireTableDataChanged();
     }
 
     private void clickExportButton() {
-        exportUrlsAndItsWebpagesTitles(
+        exportUrlsAndTitles(
                 exportUrlTextField.getText(), urls, titles
         );
     }

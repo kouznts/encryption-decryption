@@ -15,11 +15,11 @@ import java.util.regex.Pattern;
 
 public class WebCrawling {
 
-    public static String parseWebpageHtmlCode(final String webpageUrl) {
+    public static String parseHtmlCode(final String url) {
         String webpageHtmlCode = "";
 
         try {
-            URLConnection urlConnection = new URL(webpageUrl).openConnection();
+            URLConnection urlConnection = new URL(url).openConnection();
             urlConnection.setRequestProperty("User-Agent",
                     "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:63.0) Gecko/20100101 Firefox/63.0");
 
@@ -43,9 +43,9 @@ public class WebCrawling {
         return webpageHtmlCode;
     }
 
-    public static String parseWebpageTitle(final String webpageHtmlCode) {
+    public static String parseTitleFromHtmlCode(final String code) {
         Pattern javaPattern = Pattern.compile("(.*?<title>)(.*?)(</title>.*?)", Pattern.CASE_INSENSITIVE);
-        Matcher matcher = javaPattern.matcher(webpageHtmlCode);
+        Matcher matcher = javaPattern.matcher(code);
 
         String webpageTitle = "";
         if (matcher.find()) {
@@ -55,20 +55,20 @@ public class WebCrawling {
         return webpageTitle;
     }
 
-    public static List<String> parseWebpageLinks(final String webpageUrl) {
-        return parseWebpageLinksFromParsedCode(webpageUrl, parseWebpageHtmlCode(webpageUrl));
+    public static List<String> parseLinks(final String url) {
+        return parseLinksFromHtmlCode(url, parseHtmlCode(url));
     }
 
-    public static List<String> parseWebpageLinksFromParsedCode(
-            final String baseWebpageUrl, final String parsedWebpageCode) {
+    public static List<String> parseLinksFromHtmlCode(
+            final String baseUrl, final String code) {
         List<String> urls = new ArrayList<>();
 
         Pattern patternLinkTag = Pattern.compile("(?i)(<a.*?href=[\"'])(.*?)([\"'].*?>)(.*?)(</a>)");
-        Matcher matcherWebpageHtmlCode = patternLinkTag.matcher(parsedWebpageCode);
+        Matcher matcherWebpageHtmlCode = patternLinkTag.matcher(code);
 
-        String webpageUrlProtocol = baseWebpageUrl.substring(0, baseWebpageUrl.indexOf("//"));
+        String webpageUrlProtocol = baseUrl.substring(0, baseUrl.indexOf("//"));
 
-        Matcher matcherWebpageUrlBase = Pattern.compile("^.+/").matcher(baseWebpageUrl);
+        Matcher matcherWebpageUrlBase = Pattern.compile("^.+/").matcher(baseUrl);
         String webpageUrlBase = "";
         if (matcherWebpageUrlBase.find()) {
             webpageUrlBase = matcherWebpageUrlBase.group();
@@ -86,7 +86,7 @@ public class WebCrawling {
                 if (parsedUrl.toString().startsWith("//")) {
                     parsedUrl.insert(0, webpageUrlProtocol);
                 } else if (parsedUrl.toString().startsWith("/")) {
-                    parsedUrl.insert(0, baseWebpageUrl);
+                    parsedUrl.insert(0, baseUrl);
                 } else {
                     parsedUrl.insert(0, webpageUrlBase);
                 }
@@ -98,44 +98,44 @@ public class WebCrawling {
         return urls;
     }
 
-    public static List<String> parseWebpagesTitles(final List<String> webpagesUrls) {
+    public static List<String> parseTitles(final List<String> urls) {
         List<String> titles = new ArrayList<>();
 
-        for (String url : webpagesUrls) {
+        for (String url : urls) {
             titles.add(
-                    parseWebpageTitle(parseWebpageHtmlCode(url))
+                    parseTitleFromHtmlCode(parseHtmlCode(url))
             );
         }
 
         return titles;
     }
 
-    public static void exportUrlsAndItsWebpagesTitles(
-            final String exportFileName, final List<String> webpagesUrls, final List<String> webpagesTitles) {
+    public static void exportUrlsAndTitles(
+            final String exportFileName, final List<String> urls, final List<String> titles) {
 
         try (PrintWriter fileWriter = new PrintWriter(exportFileName, StandardCharsets.UTF_8)) {
-            for (int i = 0; i < webpagesUrls.size(); i++) {
-                fileWriter.println(webpagesUrls.get(i));
-                fileWriter.println(webpagesTitles.get(i));
+            for (int i = 0; i < urls.size(); i++) {
+                fileWriter.println(urls.get(i));
+                fileWriter.println(titles.get(i));
             }
         } catch (IOException exc) {
             exc.printStackTrace();
         }
     }
 
-    public static void deleteUrlsWithoutTitles(final List<String> webpagesUrls, final List<String> webpagesTitles) {
+    public static void deleteUrlsWithoutTitles(final List<String> urls, final List<String> titles) {
         List<Integer> deletingUrlsIndexes = new ArrayList<>();
 
-        for (int i = 0; i < webpagesUrls.size(); ++i) {
-            if (webpagesTitles.get(i).equals("")) {
+        for (int i = 0; i < urls.size(); ++i) {
+            if (titles.get(i).equals("")) {
                 deletingUrlsIndexes.add(i);
             }
         }
 
         for (int i = 0, deletingIndex; i < deletingUrlsIndexes.size(); ++i) {
             deletingIndex = deletingUrlsIndexes.get(i);
-            webpagesUrls.remove(deletingIndex);
-            webpagesTitles.remove(deletingIndex);
+            urls.remove(deletingIndex);
+            titles.remove(deletingIndex);
         }
     }
 
