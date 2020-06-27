@@ -144,6 +144,7 @@ public class WebcrawlerApp extends JFrame {
                 parseTitleFromHtmlCode(parseHtmlCode(urlTextField.getText()))
         );
 
+        model.setCrawlingThreadsNumber(Integer.parseInt(threadsTextField.getText()));
         model.run(urlTextField.getText());
         model.fireTableDataChanged();
     }

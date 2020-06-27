@@ -19,6 +19,8 @@ public class Webcrawling extends AbstractTableModel {
     private final List<String> urls;
     private final List<String> urlsTitles;
 
+    private int crawlingThreadsNumber = 1;
+
     public Webcrawling() {
         super();
         urls = new CopyOnWriteArrayList<>();
@@ -45,6 +47,18 @@ public class Webcrawling extends AbstractTableModel {
     @Override
     public String getColumnName(int columnIndex) {
         return tableHeaders[columnIndex];
+    }
+
+    public int getCrawlingThreadsNumber() {
+        return crawlingThreadsNumber;
+    }
+
+    public void setCrawlingThreadsNumber(int value) {
+        if (value <= 0 || value >= 8) {
+            throw new IndexOutOfBoundsException();
+        }
+
+        crawlingThreadsNumber = value;
     }
 
     public void run(final @NotNull String startUrl) {
