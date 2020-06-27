@@ -1,4 +1,4 @@
-package com.company.WebCrawler;
+package com.company.WebcrawlerApp;
 
 import javax.swing.*;
 import java.awt.*;
@@ -7,11 +7,11 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import static com.company.WebCrawling.WebCrawling.*;
 
-public class WebCrawlerFrame extends JFrame {
+public class WebcrawlerApp extends JFrame {
     private final List<String> urls = new CopyOnWriteArrayList<>();
     private final List<String> urlsTitles = new CopyOnWriteArrayList<>();
 
-    private final WebCrawlerTableModel tableModel = new WebCrawlerTableModel(urls, urlsTitles);
+    private final WebcrawlerTableModel tableModel = new WebcrawlerTableModel(urls, urlsTitles);
     private final JTable table;
     private final JScrollPane tableScrollPane;
 
@@ -26,7 +26,7 @@ public class WebCrawlerFrame extends JFrame {
     private final JTextField exportUrlTextField;
     private final JButton exportButton;
 
-    public WebCrawlerFrame() {
+    public WebcrawlerApp() {
         setFrameLayout();
 
         urlLabel = new JLabel("Start URL:");
