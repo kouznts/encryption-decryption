@@ -1,16 +1,15 @@
 package com.company.WebcrawlerApp;
 
+import com.company.Webcrawler.WebcrawlingModel;
+
 import javax.swing.*;
 import java.awt.*;
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 import static com.company.Webcrawler.Webrcrawler.*;
 
 public class WebcrawlerApp extends JFrame {
-    private final List<String> urls = new CopyOnWriteArrayList<>();
-    private final List<String> urlsTitles = new CopyOnWriteArrayList<>();
 
+    private final WebcrawlingModel model = new WebcrawlingModel();
     private final WebcrawlerAppTableModel tableModel = new WebcrawlerAppTableModel(urls, urlsTitles);
     private final JTable table;
     private final JScrollPane tableScrollPane;
@@ -147,8 +146,7 @@ public class WebcrawlerApp extends JFrame {
                 parseTitleFromHtmlCode(parseHtmlCode(urlTextField.getText()))
         );
 
-        urls.clear();
-        urlsTitles.clear();
+        model.Clear();
 
         urls.add(urlTextField.getText());
         urls.addAll(parseLinks(urlTextField.getText()));
