@@ -1,4 +1,4 @@
-package com.company.WebCrawling;
+package com.company.Webcrawler;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -6,16 +6,16 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Set;
 
-import static com.company.WebCrawling.WebCrawling.*;
+import static com.company.Webcrawler.Webrcrawler.*;
 
-public class WebCrawlingThread extends Thread {
+public class WebcrawlingThread extends Thread {
     private final Queue<String> processingUrls;
     private final Set<String> processedUrls;
 
     private final List<String> urls;
     private final List<String> urlsTitles;
 
-    public WebCrawlingThread(
+    public WebcrawlingThread(
             @NotNull final List<String> urls, @NotNull final List<String> urlsTitles,
             @NotNull final Queue<String> processingUrls, @NotNull final Set<String> processedUrls) {
 

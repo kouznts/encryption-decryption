@@ -5,7 +5,7 @@ import java.awt.*;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import static com.company.WebCrawling.WebCrawling.*;
+import static com.company.Webcrawler.Webrcrawler.*;
 
 public class WebcrawlerApp extends JFrame {
     private final List<String> urls = new CopyOnWriteArrayList<>();
