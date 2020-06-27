@@ -9,10 +9,10 @@ import static com.company.WebCrawling.WebCrawling.*;
 
 public class WebCrawlerFrame extends JFrame {
     private final List<String> urls = new CopyOnWriteArrayList<>();
-    private final List<String> titles = new CopyOnWriteArrayList<>();
+    private final List<String> urlsTitles = new CopyOnWriteArrayList<>();
 
-    private final WebCrawlerTableModel tableModel = new WebCrawlerTableModel(urls, titles);
-    private final JTable urlsAndTitlesTable;
+    private final WebCrawlerTableModel tableModel = new WebCrawlerTableModel(urls, urlsTitles);
+    private final JTable table;
     private final JScrollPane tableScrollPane;
 
     private final JLabel urlLabel;
@@ -37,8 +37,8 @@ public class WebCrawlerFrame extends JFrame {
         threadsTextField = new JTextField();
 
         urlTitleLabel = new JLabel();
-        urlsAndTitlesTable = new JTable(tableModel);
-        tableScrollPane = new JScrollPane(urlsAndTitlesTable);
+        table = new JTable(tableModel);
+        tableScrollPane = new JScrollPane(table);
         exportUrlTextField = new JTextField();
         exportButton = new JButton("Export");
 
@@ -99,10 +99,10 @@ public class WebCrawlerFrame extends JFrame {
     }
 
     private void setUrlsAndTitlesTable() {
-        urlsAndTitlesTable.setName("TitlesTable");
-        urlsAndTitlesTable.setPreferredSize(new Dimension(490, 320));
-        urlsAndTitlesTable.setEnabled(false);
-        urlsAndTitlesTable.setVisible(true);
+        table.setName("TitlesTable");
+        table.setPreferredSize(new Dimension(490, 320));
+        table.setEnabled(false);
+        table.setVisible(true);
     }
 
     private void setTableScrollPane() {
@@ -148,19 +148,19 @@ public class WebCrawlerFrame extends JFrame {
         );
 
         urls.clear();
-        titles.clear();
+        urlsTitles.clear();
 
         urls.add(urlTextField.getText());
         urls.addAll(parseLinks(urlTextField.getText()));
-        titles.addAll(parseTitles(urls));
-        deleteUrlsWithoutTitles(urls, titles);
+        urlsTitles.addAll(parseUrlsTitles(urls));
+        deleteUrlsWithoutTitles(urls, urlsTitles);
 
         tableModel.fireTableDataChanged();
     }
 
     private void clickExportButton() {
         exportUrlsAndTitles(
-                exportUrlTextField.getText(), urls, titles
-        );
+                urls, urlsTitles, exportUrlTextField.getText()
+                );
     }
 }
