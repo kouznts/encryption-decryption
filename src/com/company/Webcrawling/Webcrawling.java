@@ -68,7 +68,7 @@ public class Webcrawling extends AbstractTableModel {
     }
 
     public void setDepthNumber(int value) {
-        if (value <= 0 || value >= 4) {
+        if (value <= 0 || value > 4) {
             throw new IndexOutOfBoundsException();
         }
 
