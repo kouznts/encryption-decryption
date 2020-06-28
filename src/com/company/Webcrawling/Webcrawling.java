@@ -78,14 +78,14 @@ public class Webcrawling extends AbstractTableModel {
     public void run(final @NotNull String startUrl) {
         clear();
 
-        Queue<String> processingUrls = new ConcurrentLinkedQueue<>();
-        processingUrls.offer(startUrl);
+        Queue<String> processingQueue = new ConcurrentLinkedQueue<>();
+        processingQueue.offer(startUrl);
         Set<String> processedUrls = new CopyOnWriteArraySet<>();
 
         for (int i = 0; i < depthNumber; i++) {
-            createAndStartCrawlingThreads(processingUrls, processedUrls);
-            processingUrls.clear();
-            processingUrls.addAll(urls);
+            createAndStartCrawlingThreads(processingQueue, processedUrls);
+            processingQueue.clear();
+            processingQueue.addAll(urls);
         }
 
         //removeUrlsWithoutTitles();
