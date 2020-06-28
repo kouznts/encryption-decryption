@@ -23,6 +23,9 @@ public class WebcrawlerApp extends JFrame {
     private final JTextField depthTextField;
     private final JCheckBox depthCheckBox;
 
+    private final JLabel secondsLabel;
+    private final JTextField secondsTextField;
+
     private final JLabel urlTitleLabel;
     private final JTextField exportUrlTextField;
     private final JButton exportButton;
@@ -40,7 +43,10 @@ public class WebcrawlerApp extends JFrame {
         depthLabel = new JLabel("Depth:");
         depthTextField = new JTextField();
         depthCheckBox = new JCheckBox("Enabled", true);
-        
+
+        secondsLabel = new JLabel("Limit seconds");
+        secondsTextField = new JTextField();
+
         urlTitleLabel = new JLabel();
         exportUrlTextField = new JTextField();
         exportButton = new JButton("Export");
@@ -66,6 +72,8 @@ public class WebcrawlerApp extends JFrame {
         setDepthTextField(settings.getTextFieldWidth(), settings.getTextFieldHeight());
         setDepthCheckBox();
 
+        setSecondsTextField(settings.getTextFieldWidth(), settings.getTextFieldHeight());
+
         setUrlTitleLabel(settings.getTextFieldWidth(), settings.getTextFieldHeight());
         setExportUrlTextField(settings.getTextFieldWidth(), settings.getTextFieldHeight());
         setExportButton();
@@ -82,6 +90,9 @@ public class WebcrawlerApp extends JFrame {
         add(depthLabel, BorderLayout.LINE_START);
         add(depthTextField, BorderLayout.CENTER);
         add(depthCheckBox, BorderLayout.LINE_END);
+
+        add(secondsLabel, BorderLayout.LINE_START);
+        add(secondsTextField, BorderLayout.CENTER);
 
         add(urlTitleLabel, BorderLayout.LINE_START);
         add(exportUrlTextField, BorderLayout.CENTER);
@@ -120,6 +131,13 @@ public class WebcrawlerApp extends JFrame {
         depthCheckBox.addChangeListener(ev ->
                 depthTextField.setEnabled(depthCheckBox.isSelected())
         );
+    }
+
+    private void setSecondsTextField(final int width, final int height) {
+        secondsTextField.setName("SecondsTextField");
+        secondsTextField.setPreferredSize(new Dimension(width, height));
+        secondsTextField.setVisible(true);
+        secondsTextField.setText("1");
     }
 
     private void setUrlTitleLabel(final int width, final int height) {
