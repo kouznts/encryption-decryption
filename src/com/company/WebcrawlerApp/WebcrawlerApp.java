@@ -194,7 +194,7 @@ public class WebcrawlerApp extends JFrame {
 
         model.setCrawlingThreadsNumber(Integer.parseInt(threadsTextField.getText()));
         model.setDepthNumber(Integer.parseInt(depthTextField.getText()));
-        model.setSecondsLimit(Integer.parseInt(depthTextField.getText()));
+        model.setSecondsLimit(Integer.parseInt(secondsLimitTextField.getText()));
 
         model.run(urlTextField.getText());
 
