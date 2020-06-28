@@ -26,10 +26,10 @@ public class WebcrawlerApp extends JFrame {
     private final JTextField exportUrlTextField;
     private final JButton exportButton;
 
-    public WebcrawlerApp() {
+    public WebcrawlerApp(WebcrawlerAppSettings settings) {
         setFrameLayout();
 
-        urlLabel = new JLabel("Start URL:");
+        urlLabel = new JLabel("URL:");
         urlTextField = new JTextField();
         runButton = new JButton("Run");
 
@@ -43,10 +43,10 @@ public class WebcrawlerApp extends JFrame {
         exportUrlTextField = new JTextField();
         exportButton = new JButton("Export");
 
-        setFrameElements();
+        setFrameElements(settings);
         addElementsToFrame();
 
-        setFrame();
+        setFrame(settings.getFrameWidth(), settings.getFrameHeight());
     }
 
     private void setFrameLayout() {
@@ -55,14 +55,15 @@ public class WebcrawlerApp extends JFrame {
         setLayout(flowLayout);
     }
 
-    private void setFrameElements() {
-        setUrlTextField();
-        setThreadsTextField();
-        setDepthTextField();
-
-        setUrlTitleLabel();
+    private void setFrameElements(WebcrawlerAppSettings settings) {
+        setUrlTextField(settings.getTextFieldWidth(), settings.getTextFieldHeight());
+        setThreadsTextField(settings.getTextFieldWidth(), settings.getTextFieldHeight());
+        setDepthTextField(settings.getTextFieldWidth(), settings.getTextFieldHeight());
         setRunButton();
-        setExportUrlTextField();
+
+        setUrlTitleLabel(settings.getTextFieldWidth(), settings.getTextFieldHeight());
+
+        setExportUrlTextField(settings.getTextFieldWidth(), settings.getTextFieldHeight());
         setExportButton();
     }
 
@@ -82,30 +83,30 @@ public class WebcrawlerApp extends JFrame {
         add(exportButton, BorderLayout.LINE_END);
     }
 
-    private void setUrlTextField() {
+    private void setUrlTextField(final int width, final int height) {
         urlTextField.setName("UrlTextField");
-        urlTextField.setPreferredSize(new Dimension(350, 25));
+        urlTextField.setPreferredSize(new Dimension(width, height));
         urlTextField.setVisible(true);
         urlTextField.setText("https://hi.hyperskill.org/");
     }
 
-    private void setThreadsTextField() {
+    private void setThreadsTextField(final int width, final int height) {
         threadsTextField.setName("ThreadsTextField");
-        threadsTextField.setPreferredSize(new Dimension(350, 25));
+        threadsTextField.setPreferredSize(new Dimension(width, height));
         threadsTextField.setVisible(true);
         threadsTextField.setText("1");
     }
 
-    private void setDepthTextField() {
+    private void setDepthTextField(final int width, final int height) {
         depthTextField.setName("DepthTextField");
-        depthTextField.setPreferredSize(new Dimension(350, 25));
+        depthTextField.setPreferredSize(new Dimension(width, height));
         depthTextField.setVisible(true);
         depthTextField.setText("1");
     }
 
-    private void setUrlTitleLabel() {
+    private void setUrlTitleLabel(final int width, final int height) {
         urlTitleLabel.setName("TitleLabel");
-        urlTitleLabel.setPreferredSize(new Dimension(500, 25));
+        urlTitleLabel.setPreferredSize(new Dimension(width, height));
         urlTitleLabel.setVisible(true);
     }
 
@@ -116,9 +117,9 @@ public class WebcrawlerApp extends JFrame {
         runButton.addActionListener(ev -> clickRunButton());
     }
 
-    private void setExportUrlTextField() {
+    private void setExportUrlTextField(final int width, final int height) {
         exportUrlTextField.setName("ExportUrlTextField");
-        exportUrlTextField.setPreferredSize(new Dimension(350, 25));
+        exportUrlTextField.setPreferredSize(new Dimension(width, height));
         exportUrlTextField.setVisible(true);
         exportUrlTextField.setText("D:\\webcrawling.txt");
     }
@@ -130,12 +131,12 @@ public class WebcrawlerApp extends JFrame {
         exportButton.addActionListener(ev -> clickExportButton());
     }
 
-    private void setFrame() {
+    private void setFrame(final int width, final int height) {
         setTitle("WebCrawler");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        setSize(500, 600);
-        setPreferredSize(new Dimension(500, 600));
+        setSize(width, height);
+        setPreferredSize(new Dimension(width, height));
         setVisible(true);
     }
 
