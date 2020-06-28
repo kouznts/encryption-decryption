@@ -118,6 +118,7 @@ public class WebcrawlerApp extends JFrame {
         exportUrlTextField.setName("ExportUrlTextField");
         exportUrlTextField.setPreferredSize(new Dimension(350, 25));
         exportUrlTextField.setVisible(true);
+        exportUrlTextField.setText("D:\\webcrawling.txt");
     }
 
     private void setExportButton() {
