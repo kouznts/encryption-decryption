@@ -28,33 +28,35 @@ public class WebcrawlingThread extends Thread {
 
     @Override
     public void run() {
-        final String currUrl = processingUrls.poll();
-        if (currUrl == null) {
-            return;
-        }
-        if (processedUrls.contains(currUrl)) {
-            return;
-        }
-
-        if (!urls.contains(currUrl)) {
-            final String parsedHtmlCode = parseHtmlCode(currUrl);
-            final String currUrlTitle = parseTitleFromHtmlCode(parsedHtmlCode);
-            urls.add(currUrl);
-            urlsTitles.add(currUrlTitle);
-
-            final List<String> parsedLinks = parseLinksFromHtmlCode(currUrl, parsedHtmlCode);
-            String parsedLink = "";
-            String parsedLinkTitle = "";
-            for (String link : parsedLinks) {
-                parsedLink = link;
-                if (!urls.contains(parsedLink)) {
-                    parsedLinkTitle = parseTitle(parsedLink);
-                    urls.add(parsedLink);
-                    urlsTitles.add(parsedLinkTitle);
-                }
+        do {
+            final String currUrl = processingUrls.poll();
+            if (currUrl == null) {
+                return;
+            }
+            if (processedUrls.contains(currUrl)) {
+                return;
             }
 
-            processedUrls.add(currUrl);
-        }
+            if (!urls.contains(currUrl)) {
+                final String parsedHtmlCode = parseHtmlCode(currUrl);
+                final String currUrlTitle = parseTitleFromHtmlCode(parsedHtmlCode);
+                urls.add(currUrl);
+                urlsTitles.add(currUrlTitle);
+
+                final List<String> parsedLinks = parseLinksFromHtmlCode(currUrl, parsedHtmlCode);
+                String parsedLink;
+                String parsedLinkTitle;
+                for (String link : parsedLinks) {
+                    parsedLink = link;
+                    if (!urls.contains(parsedLink)) {
+                        parsedLinkTitle = parseTitle(parsedLink);
+                        urls.add(parsedLink);
+                        urlsTitles.add(parsedLinkTitle);
+                    }
+                }
+
+                processedUrls.add(currUrl);
+            }
+        } while (!processingUrls.isEmpty());
     }
 }
