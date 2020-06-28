@@ -85,7 +85,7 @@ public class Webcrawling extends AbstractTableModel {
         for (int i = 0; i < depthNumber; i++) {
             createAndStartCrawlingThreads(processingQueue, processedUrls);
             processingQueue.clear();
-            processingQueue.addAll(urls);
+            addUnprocessedUrlsToProcessingQueue(processingQueue, processedUrls);
         }
 
         //removeUrlsWithoutTitles();
@@ -111,6 +111,17 @@ public class Webcrawling extends AbstractTableModel {
             } catch (InterruptedException exc) {
                 exc.printStackTrace();
             }
+        }
+    }
+
+    private void addUnprocessedUrlsToProcessingQueue(
+            final @NotNull Queue<String> processingUrls, final @NotNull Set<String> processedUrls
+    ) {
+        String currUrl;
+        for (String url : urls) {
+            currUrl = url;
+            if (!processedUrls.contains(currUrl))
+                processingUrls.add(currUrl);
         }
     }
 
