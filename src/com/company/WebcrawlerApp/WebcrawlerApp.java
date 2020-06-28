@@ -1,4 +1,6 @@
-package com.company;
+package com.company.WebcrawlerApp;
+
+import com.company.Webcrawling;
 
 import javax.swing.*;
 import java.awt.*;
