@@ -51,20 +51,12 @@ public class Webcrawling extends AbstractTableModel {
         return tableHeaders[columnIndex];
     }
 
-    public int getCrawlingThreadsNumber() {
-        return crawlingThreadsNumber;
-    }
-
     public void setCrawlingThreadsNumber(int value) {
         if (value <= 0 || value > 8) {
             throw new IndexOutOfBoundsException();
         }
 
         crawlingThreadsNumber = value;
-    }
-
-    public int getDepthNumber() {
-        return depthNumber;
     }
 
     public void setDepthNumber(int value) {
