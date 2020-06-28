@@ -8,10 +8,11 @@ import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Queue;
+import java.util.Set;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.CopyOnWriteArrayList;
-
-import static com.company.WebParsing.parseLinks;
-import static com.company.WebParsing.parseUrlsTitles;
+import java.util.concurrent.CopyOnWriteArraySet;
 
 public class Webcrawling extends AbstractTableModel {
 
@@ -74,6 +75,24 @@ public class Webcrawling extends AbstractTableModel {
     private void clear() {
         urls.clear();
         urlsTitles.clear();
+    }
+
+    private void createAndStartCrawlingThreads(
+            final @NotNull Queue<String> processingUrls, final @NotNull Set<String> processedUrls) {
+
+        Thread[] threads = new Thread[crawlingThreadsNumber];
+        for (int i = 0; i < threads.length; i++) {
+            threads[i] = new WebcrawlingThread(urls, urlsTitles, processingUrls, processedUrls);
+            threads[i].start();
+        }
+
+        for (Thread thread : threads) {
+            try {
+                thread.join();
+            } catch (InterruptedException exc) {
+                exc.printStackTrace();
+            }
+        }
     }
 
     private void removeUrlsWithoutTitles() {
