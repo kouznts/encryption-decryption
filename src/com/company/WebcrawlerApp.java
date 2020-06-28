@@ -19,7 +19,7 @@ public class WebcrawlerApp extends JFrame {
     private final JLabel threadsLabel;
     private final JTextField threadsTextField;
 
-    private final JToggleButton runButton;
+    private final JButton runButton;
     private final JTextField exportUrlTextField;
     private final JButton exportButton;
 
@@ -28,7 +28,7 @@ public class WebcrawlerApp extends JFrame {
 
         urlLabel = new JLabel("Start URL:");
         urlTextField = new JTextField();
-        runButton = new JToggleButton("Run");
+        runButton = new JButton("Run");
 
         threadsLabel = new JLabel("Threads:");
         threadsTextField = new JTextField();
