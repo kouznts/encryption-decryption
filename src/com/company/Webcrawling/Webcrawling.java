@@ -56,7 +56,7 @@ public class Webcrawling extends AbstractTableModel {
     }
 
     public void setCrawlingThreadsNumber(int value) {
-        if (value <= 0 || value >= 8) {
+        if (value <= 0 || value > 8) {
             throw new IndexOutOfBoundsException();
         }
 
