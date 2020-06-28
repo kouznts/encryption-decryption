@@ -81,12 +81,14 @@ public class WebcrawlerApp extends JFrame {
         urlTextField.setName("UrlTextField");
         urlTextField.setPreferredSize(new Dimension(350, 25));
         urlTextField.setVisible(true);
+        urlTextField.setText("https://hi.hyperskill.org/");
     }
 
     private void setThreadsTextField() {
         threadsTextField.setName("ThreadsTextField");
         threadsTextField.setPreferredSize(new Dimension(350, 25));
         threadsTextField.setVisible(true);
+        threadsTextField.setText("1");
     }
 
     private void setUrlTitleLabel() {
