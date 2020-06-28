@@ -19,6 +19,9 @@ public class WebcrawlerApp extends JFrame {
     private final JLabel threadsLabel;
     private final JTextField threadsTextField;
 
+    private final JLabel depthLabel;
+    private final JTextField depthTextField;
+
     private final JButton runButton;
     private final JTextField exportUrlTextField;
     private final JButton exportButton;
@@ -32,6 +35,9 @@ public class WebcrawlerApp extends JFrame {
 
         threadsLabel = new JLabel("Threads:");
         threadsTextField = new JTextField();
+
+        depthLabel = new JLabel("Depth:");
+        depthTextField = new JTextField();
 
         urlTitleLabel = new JLabel();
         table = new JTable(model);
@@ -54,6 +60,7 @@ public class WebcrawlerApp extends JFrame {
     private void setFrameElements() {
         setUrlTextField();
         setThreadsTextField();
+        setDepthTextField();
 
         setUrlTitleLabel();
         setUrlsAndTitlesTable();
@@ -70,6 +77,9 @@ public class WebcrawlerApp extends JFrame {
 
         add(threadsLabel, BorderLayout.LINE_START);
         add(threadsTextField, BorderLayout.CENTER);
+
+        add(depthLabel, BorderLayout.LINE_START);
+        add(depthTextField, BorderLayout.CENTER);
 
         add(urlTitleLabel, BorderLayout.LINE_START);
         add(tableScrollPane, BorderLayout.LINE_START);
@@ -89,6 +99,13 @@ public class WebcrawlerApp extends JFrame {
         threadsTextField.setPreferredSize(new Dimension(350, 25));
         threadsTextField.setVisible(true);
         threadsTextField.setText("1");
+    }
+
+    private void setDepthTextField() {
+        depthTextField.setName("DepthTextField");
+        depthTextField.setPreferredSize(new Dimension(350, 25));
+        depthTextField.setVisible(true);
+        depthTextField.setText("1");
     }
 
     private void setUrlTitleLabel() {
