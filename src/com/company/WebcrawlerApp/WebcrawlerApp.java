@@ -23,9 +23,9 @@ public class WebcrawlerApp extends JFrame {
     private final JTextField depthTextField;
     private final JCheckBox depthCheckBox;
 
-    private final JLabel secondsLabel;
-    private final JTextField secondsTextField;
-    private final JCheckBox secondsCheckBox;
+    private final JLabel secondsLimitLabel;
+    private final JTextField secondsLimitTextField;
+    private final JCheckBox secondsLimitCheckBox;
 
     private final JLabel urlTitleLabel;
     private final JTextField exportUrlTextField;
@@ -45,9 +45,9 @@ public class WebcrawlerApp extends JFrame {
         depthTextField = new JTextField();
         depthCheckBox = new JCheckBox("Enabled", true);
 
-        secondsLabel = new JLabel("Limit seconds");
-        secondsTextField = new JTextField();
-        secondsCheckBox = new JCheckBox("Enabled", true);
+        secondsLimitLabel = new JLabel("Limit seconds");
+        secondsLimitTextField = new JTextField();
+        secondsLimitCheckBox = new JCheckBox("Enabled", true);
 
         urlTitleLabel = new JLabel();
         exportUrlTextField = new JTextField();
@@ -74,8 +74,8 @@ public class WebcrawlerApp extends JFrame {
         setDepthTextField(settings.getTextFieldWidth(), settings.getTextFieldHeight());
         setDepthCheckBox();
 
-        setSecondsTextField(settings.getTextFieldWidth(), settings.getTextFieldHeight());
-        setSecondsCheckBox();
+        setSecondsLimitTextField(settings.getTextFieldWidth(), settings.getTextFieldHeight());
+        setSecondsLimitCheckBox();
 
         setUrlTitleLabel(settings.getTextFieldWidth(), settings.getTextFieldHeight());
         setExportUrlTextField(settings.getTextFieldWidth(), settings.getTextFieldHeight());
@@ -94,9 +94,9 @@ public class WebcrawlerApp extends JFrame {
         add(depthTextField, BorderLayout.CENTER);
         add(depthCheckBox, BorderLayout.LINE_END);
 
-        add(secondsLabel, BorderLayout.LINE_START);
-        add(secondsTextField, BorderLayout.CENTER);
-        add(secondsCheckBox, BorderLayout.LINE_END);
+        add(secondsLimitLabel, BorderLayout.LINE_START);
+        add(secondsLimitTextField, BorderLayout.CENTER);
+        add(secondsLimitCheckBox, BorderLayout.LINE_END);
 
         add(urlTitleLabel, BorderLayout.LINE_START);
         add(exportUrlTextField, BorderLayout.CENTER);
@@ -137,16 +137,16 @@ public class WebcrawlerApp extends JFrame {
         );
     }
 
-    private void setSecondsTextField(final int width, final int height) {
-        secondsTextField.setName("SecondsTextField");
-        secondsTextField.setPreferredSize(new Dimension(width, height));
-        secondsTextField.setVisible(true);
-        secondsTextField.setText("1");
+    private void setSecondsLimitTextField(final int width, final int height) {
+        secondsLimitTextField.setName("SecondsTextField");
+        secondsLimitTextField.setPreferredSize(new Dimension(width, height));
+        secondsLimitTextField.setVisible(true);
+        secondsLimitTextField.setText("1");
     }
 
-    private void setSecondsCheckBox() {
-        secondsCheckBox.addChangeListener(ev ->
-                secondsTextField.setEnabled(secondsCheckBox.isSelected())
+    private void setSecondsLimitCheckBox() {
+        secondsLimitCheckBox.addChangeListener(ev ->
+                secondsLimitTextField.setEnabled(secondsLimitCheckBox.isSelected())
         );
     }
 
