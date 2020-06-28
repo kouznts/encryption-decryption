@@ -107,8 +107,6 @@ public class Webcrawling extends AbstractTableModel {
             processingQueue.clear();
             addUnprocessedUrlsToProcessingQueue(processingQueue, processedUrls);
         }
-
-        //removeUrlsWithoutTitles();
     }
 
     private void clear() {
@@ -145,16 +143,16 @@ public class Webcrawling extends AbstractTableModel {
         }
     }
 
-    private void removeUrlsWithoutTitles() {
+    public void removeUrlsWithoutTitles() {
         List<Integer> removingUrlsIndexes = new ArrayList<>();
 
-        for (int i = 0; i < urls.size(); ++i) {
+        for (int i = 0; i < urls.size(); i++) {
             if (urlsTitles.get(i).equals("")) {
                 removingUrlsIndexes.add(i);
             }
         }
 
-        for (int i = 0, deletingIndex; i < removingUrlsIndexes.size(); ++i) {
+        for (int i = 0, deletingIndex; i < removingUrlsIndexes.size(); i++) {
             deletingIndex = removingUrlsIndexes.get(i);
             urls.remove(deletingIndex);
             urlsTitles.remove(deletingIndex);

@@ -223,6 +223,7 @@ public class WebcrawlerApp extends JFrame {
         int elapsedTime = (int) ((endMillis - startMillis) / 1000L);
         elapsedSecondsLabel.setText(String.valueOf(elapsedTime));
 
+        model.removeUrlsWithoutTitles();
         parsedPagesNumberLabel.setText(String.valueOf(model.getParsedPagesNumber()));
     }
 
