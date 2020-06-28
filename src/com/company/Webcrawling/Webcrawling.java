@@ -22,6 +22,7 @@ public class Webcrawling extends AbstractTableModel {
 
     private int crawlingThreadsNumber = 1;
     private int depthNumber = 1;
+    private long millisLimit = 20000;
 
     public Webcrawling() {
         super();
@@ -67,6 +68,18 @@ public class Webcrawling extends AbstractTableModel {
         depthNumber = value;
     }
 
+    public int getSecondsLimit() {
+        return (int) millisLimit / 1000;
+    }
+
+    public void setSecondsLimit(int value) {
+        if (value < 5 || value > 60) {
+            throw new IndexOutOfBoundsException();
+        }
+
+        millisLimit = value * 1000;
+    }
+
     public void run(final @NotNull String startUrl) {
         clear();
 
@@ -99,7 +112,7 @@ public class Webcrawling extends AbstractTableModel {
 
         for (Thread thread : threads) {
             try {
-                thread.join();
+                thread.join(millisLimit);
             } catch (InterruptedException exc) {
                 exc.printStackTrace();
             }

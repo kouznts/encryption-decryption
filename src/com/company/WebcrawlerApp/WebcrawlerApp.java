@@ -141,7 +141,7 @@ public class WebcrawlerApp extends JFrame {
         secondsLimitTextField.setName("SecondsTextField");
         secondsLimitTextField.setPreferredSize(new Dimension(width, height));
         secondsLimitTextField.setVisible(true);
-        secondsLimitTextField.setText("1");
+        secondsLimitTextField.setText(String.valueOf(model.getSecondsLimit()));
     }
 
     private void setSecondsLimitCheckBox() {
@@ -184,8 +184,9 @@ public class WebcrawlerApp extends JFrame {
                 parseTitleFromHtmlCode(parseHtmlCode(urlTextField.getText()))
         );
 
-        model.setDepthNumber(Integer.parseInt(depthTextField.getText()));
         model.setCrawlingThreadsNumber(Integer.parseInt(threadsTextField.getText()));
+        model.setDepthNumber(Integer.parseInt(depthTextField.getText()));
+        model.setSecondsLimit(Integer.parseInt(depthTextField.getText()));
 
         model.run(urlTextField.getText());
 
