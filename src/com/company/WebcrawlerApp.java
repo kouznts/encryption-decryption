@@ -9,8 +9,6 @@ import static com.company.WebParsing.parseTitleFromHtmlCode;
 public class WebcrawlerApp extends JFrame {
 
     private final Webcrawling model = new Webcrawling();
-    private final JTable table;
-    private final JScrollPane tableScrollPane;
 
     private final JLabel urlLabel;
     private final JTextField urlTextField;
@@ -40,8 +38,6 @@ public class WebcrawlerApp extends JFrame {
         depthTextField = new JTextField();
 
         urlTitleLabel = new JLabel();
-        table = new JTable(model);
-        tableScrollPane = new JScrollPane(table);
         exportUrlTextField = new JTextField();
         exportButton = new JButton("Export");
 
@@ -63,8 +59,6 @@ public class WebcrawlerApp extends JFrame {
         setDepthTextField();
 
         setUrlTitleLabel();
-        setUrlsAndTitlesTable();
-        setTableScrollPane();
         setRunButton();
         setExportUrlTextField();
         setExportButton();
@@ -82,7 +76,6 @@ public class WebcrawlerApp extends JFrame {
         add(depthTextField, BorderLayout.CENTER);
 
         add(urlTitleLabel, BorderLayout.LINE_START);
-        add(tableScrollPane, BorderLayout.LINE_START);
         add(exportUrlTextField, BorderLayout.CENTER);
         add(exportButton, BorderLayout.LINE_END);
     }
@@ -112,21 +105,6 @@ public class WebcrawlerApp extends JFrame {
         urlTitleLabel.setName("TitleLabel");
         urlTitleLabel.setPreferredSize(new Dimension(500, 25));
         urlTitleLabel.setVisible(true);
-    }
-
-    private void setUrlsAndTitlesTable() {
-        table.setName("TitlesTable");
-        table.setPreferredSize(new Dimension(490, 320));
-        table.setEnabled(false);
-        table.setVisible(true);
-    }
-
-    private void setTableScrollPane() {
-        tableScrollPane.setHorizontalScrollBarPolicy(
-                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-
-        tableScrollPane.setVerticalScrollBarPolicy(
-                ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
     }
 
     private void setRunButton() {
