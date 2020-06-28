@@ -3,6 +3,8 @@ package com.company.WebcrawlerApp;
 import com.company.Webcrawling.Webcrawling;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 
 import static com.company.Webcrawling.WebParsing.parseHtmlCode;
@@ -21,6 +23,7 @@ public class WebcrawlerApp extends JFrame {
 
     private final JLabel depthLabel;
     private final JTextField depthTextField;
+    private final JCheckBox depthCheckBox;
 
     private final JButton runButton;
     private final JTextField exportUrlTextField;
@@ -38,6 +41,7 @@ public class WebcrawlerApp extends JFrame {
 
         depthLabel = new JLabel("Depth:");
         depthTextField = new JTextField();
+        depthCheckBox = new JCheckBox("Enabled", true);
 
         urlTitleLabel = new JLabel();
         exportUrlTextField = new JTextField();
@@ -57,12 +61,11 @@ public class WebcrawlerApp extends JFrame {
 
     private void setFrameElements(WebcrawlerAppSettings settings) {
         setUrlTextField(settings.getTextFieldWidth(), settings.getTextFieldHeight());
+        setUrlTitleLabel(settings.getTextFieldWidth(), settings.getTextFieldHeight());
         setThreadsTextField(settings.getTextFieldWidth(), settings.getTextFieldHeight());
         setDepthTextField(settings.getTextFieldWidth(), settings.getTextFieldHeight());
+        setDepthCheckBox();
         setRunButton();
-
-        setUrlTitleLabel(settings.getTextFieldWidth(), settings.getTextFieldHeight());
-
         setExportUrlTextField(settings.getTextFieldWidth(), settings.getTextFieldHeight());
         setExportButton();
     }
@@ -77,6 +80,7 @@ public class WebcrawlerApp extends JFrame {
 
         add(depthLabel, BorderLayout.LINE_START);
         add(depthTextField, BorderLayout.CENTER);
+        add(depthCheckBox, BorderLayout.LINE_END);
 
         add(urlTitleLabel, BorderLayout.LINE_START);
         add(exportUrlTextField, BorderLayout.CENTER);
@@ -102,6 +106,12 @@ public class WebcrawlerApp extends JFrame {
         depthTextField.setPreferredSize(new Dimension(width, height));
         depthTextField.setVisible(true);
         depthTextField.setText("1");
+    }
+
+    private void setDepthCheckBox() {
+        depthCheckBox.addChangeListener(ev ->
+                depthTextField.setEnabled(depthCheckBox.isSelected())
+        );
     }
 
     private void setUrlTitleLabel(final int width, final int height) {
