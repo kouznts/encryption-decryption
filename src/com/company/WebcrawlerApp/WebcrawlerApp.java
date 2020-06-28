@@ -3,8 +3,6 @@ package com.company.WebcrawlerApp;
 import com.company.Webcrawling.Webcrawling;
 
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.awt.*;
 
 import static com.company.Webcrawling.WebParsing.parseHtmlCode;
@@ -16,7 +14,7 @@ public class WebcrawlerApp extends JFrame {
 
     private final JLabel urlLabel;
     private final JTextField urlTextField;
-    private final JLabel urlTitleLabel;
+    private final JButton runButton;
 
     private final JLabel threadsLabel;
     private final JTextField threadsTextField;
@@ -25,7 +23,7 @@ public class WebcrawlerApp extends JFrame {
     private final JTextField depthTextField;
     private final JCheckBox depthCheckBox;
 
-    private final JButton runButton;
+    private final JLabel urlTitleLabel;
     private final JTextField exportUrlTextField;
     private final JButton exportButton;
 
@@ -42,7 +40,7 @@ public class WebcrawlerApp extends JFrame {
         depthLabel = new JLabel("Depth:");
         depthTextField = new JTextField();
         depthCheckBox = new JCheckBox("Enabled", true);
-
+        
         urlTitleLabel = new JLabel();
         exportUrlTextField = new JTextField();
         exportButton = new JButton("Export");
@@ -61,11 +59,14 @@ public class WebcrawlerApp extends JFrame {
 
     private void setFrameElements(WebcrawlerAppSettings settings) {
         setUrlTextField(settings.getTextFieldWidth(), settings.getTextFieldHeight());
-        setUrlTitleLabel(settings.getTextFieldWidth(), settings.getTextFieldHeight());
+        setRunButton();
+
         setThreadsTextField(settings.getTextFieldWidth(), settings.getTextFieldHeight());
+
         setDepthTextField(settings.getTextFieldWidth(), settings.getTextFieldHeight());
         setDepthCheckBox();
-        setRunButton();
+
+        setUrlTitleLabel(settings.getTextFieldWidth(), settings.getTextFieldHeight());
         setExportUrlTextField(settings.getTextFieldWidth(), settings.getTextFieldHeight());
         setExportButton();
     }
@@ -94,6 +95,13 @@ public class WebcrawlerApp extends JFrame {
         urlTextField.setText("https://hi.hyperskill.org/");
     }
 
+    private void setRunButton() {
+        runButton.setName("RunButton");
+        runButton.setVisible(true);
+
+        runButton.addActionListener(ev -> clickRunButton());
+    }
+
     private void setThreadsTextField(final int width, final int height) {
         threadsTextField.setName("ThreadsTextField");
         threadsTextField.setPreferredSize(new Dimension(width, height));
@@ -118,13 +126,6 @@ public class WebcrawlerApp extends JFrame {
         urlTitleLabel.setName("TitleLabel");
         urlTitleLabel.setPreferredSize(new Dimension(width, height));
         urlTitleLabel.setVisible(true);
-    }
-
-    private void setRunButton() {
-        runButton.setName("RunButton");
-        runButton.setVisible(true);
-
-        runButton.addActionListener(ev -> clickRunButton());
     }
 
     private void setExportUrlTextField(final int width, final int height) {
