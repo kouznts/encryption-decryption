@@ -82,7 +82,11 @@ public class Webcrawling extends AbstractTableModel {
         processingUrls.offer(startUrl);
         Set<String> processedUrls = new CopyOnWriteArraySet<>();
 
-        createAndStartCrawlingThreads(processingUrls, processedUrls);
+        for (int i = 0; i < depthNumber; i++) {
+            createAndStartCrawlingThreads(processingUrls, processedUrls);
+            processingUrls.clear();
+            processingUrls.addAll(urls);
+        }
 
         //removeUrlsWithoutTitles();
     }
