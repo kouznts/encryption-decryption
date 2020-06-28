@@ -10,7 +10,7 @@ import static com.company.Webcrawling.WebParsing.parseTitleFromHtmlCode;
 
 public class WebcrawlerApp extends JFrame {
 
-    private final Webcrawling model = new Webcrawling();
+    private final Webcrawling model;
 
     private final JLabel urlLabel;
     private final JTextField urlTextField;
@@ -33,6 +33,8 @@ public class WebcrawlerApp extends JFrame {
 
     public WebcrawlerApp(WebcrawlerAppSettings settings) {
         setFrameLayout();
+
+        model = new Webcrawling();
 
         urlLabel = new JLabel("URL:");
         urlTextField = new JTextField();
