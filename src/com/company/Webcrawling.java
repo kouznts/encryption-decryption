@@ -21,6 +21,7 @@ public class Webcrawling extends AbstractTableModel {
     private final List<String> urlsTitles;
 
     private int crawlingThreadsNumber = 1;
+    private int depthNumber = 1;
 
     public Webcrawling() {
         super();
@@ -60,6 +61,18 @@ public class Webcrawling extends AbstractTableModel {
         }
 
         crawlingThreadsNumber = value;
+    }
+
+    public int getDepthNumber() {
+        return depthNumber;
+    }
+
+    public void setDepthNumber(int value) {
+        if (value <= 0 || value >= 4) {
+            throw new IndexOutOfBoundsException();
+        }
+
+        depthNumber = value;
     }
 
     public void run(final @NotNull String startUrl) {
