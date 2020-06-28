@@ -15,6 +15,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.CopyOnWriteArraySet;
 
 public class Webcrawling extends AbstractTableModel {
+    public static final int DEFAULT_MILLIS_LIMIT = 20000;
 
     private final String[] tableHeaders = {"URL", "Title"};
     private final List<String> urls;
@@ -22,7 +23,7 @@ public class Webcrawling extends AbstractTableModel {
 
     private int crawlingThreadsNumber = 1;
     private int depthNumber = 1;
-    private long millisLimit = 20000;
+    private long millisLimit = DEFAULT_MILLIS_LIMIT;
 
     public Webcrawling() {
         super();
@@ -78,6 +79,10 @@ public class Webcrawling extends AbstractTableModel {
         }
 
         millisLimit = value * 1000;
+    }
+
+    public void resetSecondsLimit() {
+        millisLimit = DEFAULT_MILLIS_LIMIT;
     }
 
     public void run(final @NotNull String startUrl) {

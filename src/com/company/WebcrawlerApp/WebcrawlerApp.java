@@ -145,9 +145,15 @@ public class WebcrawlerApp extends JFrame {
     }
 
     private void setSecondsLimitCheckBox() {
-        secondsLimitCheckBox.addChangeListener(ev ->
-                secondsLimitTextField.setEnabled(secondsLimitCheckBox.isSelected())
-        );
+        secondsLimitCheckBox.addChangeListener(ev -> {
+            if (secondsLimitCheckBox.isSelected()) {
+                secondsLimitTextField.setEnabled(true);
+            } else {
+                secondsLimitTextField.setEnabled(false);
+                model.resetSecondsLimit();
+                secondsLimitTextField.setText(String.valueOf(model.getSecondsLimit()));
+            }
+        });
     }
 
     private void setUrlTitleLabel(final int width, final int height) {
