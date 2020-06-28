@@ -20,21 +20,25 @@ public class WebParsing {
 
         try {
             URLConnection urlConnection = new URL(url).openConnection();
-            urlConnection.setRequestProperty("User-Agent",
-                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:63.0) Gecko/20100101 Firefox/63.0");
+            if (urlConnection != null) {
+                urlConnection.setRequestProperty("User-Agent",
+                        "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:63.0) Gecko/20100101 Firefox/63.0");
 
-            int responseCode = ((HttpURLConnection) urlConnection).getResponseCode();
-            if (responseCode == 404
-                    || !urlConnection.getContentType().startsWith("text/html")) {
-                return webpageHtmlCode;
-            }
+                int responseCode = ((HttpURLConnection) urlConnection).getResponseCode();
+                if (responseCode == 404
+                        || responseCode == 400
+                        || urlConnection.getContentType() == null
+                        || !urlConnection.getContentType().startsWith("text/html")) {
+                    return webpageHtmlCode;
+                }
 
-            try (InputStream inputStream =
-                         new BufferedInputStream(urlConnection.getInputStream())) {
+                try (InputStream inputStream =
+                             new BufferedInputStream(urlConnection.getInputStream())) {
 
-                webpageHtmlCode = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
-            } catch (IOException exc) {
-                exc.printStackTrace();
+                    webpageHtmlCode = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
+                } catch (IOException exc) {
+                    exc.printStackTrace();
+                }
             }
         } catch (IOException exc) {
             exc.printStackTrace();
