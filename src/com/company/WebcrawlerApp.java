@@ -163,7 +163,7 @@ public class WebcrawlerApp extends JFrame {
                 parseTitleFromHtmlCode(parseHtmlCode(urlTextField.getText()))
         );
 
-        model.setDepthNumber(Integer.parseInt(depthLabel.getText()));
+        model.setDepthNumber(Integer.parseInt(depthTextField.getText()));
         model.setCrawlingThreadsNumber(Integer.parseInt(threadsTextField.getText()));
 
         model.run(urlTextField.getText());
