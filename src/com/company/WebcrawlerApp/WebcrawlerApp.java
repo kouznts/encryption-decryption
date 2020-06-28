@@ -27,6 +27,9 @@ public class WebcrawlerApp extends JFrame {
     private final JTextField secondsLimitTextField;
     private final JCheckBox secondsLimitCheckBox;
 
+    private final JLabel elapsedSecondsNameLabel;
+    private final JLabel elapsedSecondsLabel;
+
     private final JLabel urlTitleLabel;
     private final JTextField exportUrlTextField;
     private final JButton exportButton;
@@ -47,9 +50,12 @@ public class WebcrawlerApp extends JFrame {
         depthTextField = new JTextField();
         depthCheckBox = new JCheckBox("Enabled", true);
 
-        secondsLimitLabel = new JLabel("Limit seconds");
+        secondsLimitLabel = new JLabel("Limit seconds:");
         secondsLimitTextField = new JTextField();
         secondsLimitCheckBox = new JCheckBox("Enabled", true);
+
+        elapsedSecondsNameLabel = new JLabel("Elapsed seconds:");
+        elapsedSecondsLabel = new JLabel("0");
 
         urlTitleLabel = new JLabel();
         exportUrlTextField = new JTextField();
@@ -99,6 +105,9 @@ public class WebcrawlerApp extends JFrame {
         add(secondsLimitLabel, BorderLayout.LINE_START);
         add(secondsLimitTextField, BorderLayout.CENTER);
         add(secondsLimitCheckBox, BorderLayout.LINE_END);
+
+        add(elapsedSecondsNameLabel, BorderLayout.LINE_START);
+        add(elapsedSecondsLabel, BorderLayout.CENTER);
 
         add(urlTitleLabel, BorderLayout.LINE_START);
         add(exportUrlTextField, BorderLayout.CENTER);
@@ -188,6 +197,7 @@ public class WebcrawlerApp extends JFrame {
     }
 
     private void clickRunButton() {
+        elapsedSecondsLabel.setText("0");
         urlTitleLabel.setText(
                 parseTitleFromHtmlCode(parseHtmlCode(urlTextField.getText()))
         );
@@ -196,9 +206,12 @@ public class WebcrawlerApp extends JFrame {
         model.setDepthNumber(Integer.parseInt(depthTextField.getText()));
         model.setSecondsLimit(Integer.parseInt(secondsLimitTextField.getText()));
 
+        long startMillis = System.currentTimeMillis();
         model.run(urlTextField.getText());
+        long endMillis = System.currentTimeMillis();
 
-        model.fireTableDataChanged();
+        int elapsedTime = (int)((endMillis - startMillis)/1000L);
+        elapsedSecondsLabel.setText(String.valueOf(elapsedTime));
     }
 
     private void clickExportButton() {
