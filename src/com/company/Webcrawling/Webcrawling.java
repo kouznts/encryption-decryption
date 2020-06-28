@@ -1,4 +1,4 @@
-package com.company;
+package com.company.Webcrawling;
 
 import org.jetbrains.annotations.NotNull;
 

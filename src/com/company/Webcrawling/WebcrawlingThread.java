@@ -1,4 +1,4 @@
-package com.company;
+package com.company.Webcrawling;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Set;
 
-import static com.company.WebParsing.*;
+import static com.company.Webcrawling.WebParsing.*;
 
 public class WebcrawlingThread extends Thread {
     private final Queue<String> processingUrls;

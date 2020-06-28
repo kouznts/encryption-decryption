@@ -1,12 +1,12 @@
 package com.company.WebcrawlerApp;
 
-import com.company.Webcrawling;
+import com.company.Webcrawling.Webcrawling;
 
 import javax.swing.*;
 import java.awt.*;
 
-import static com.company.WebParsing.parseHtmlCode;
-import static com.company.WebParsing.parseTitleFromHtmlCode;
+import static com.company.Webcrawling.WebParsing.parseHtmlCode;
+import static com.company.Webcrawling.WebParsing.parseTitleFromHtmlCode;
 
 public class WebcrawlerApp extends JFrame {
 
