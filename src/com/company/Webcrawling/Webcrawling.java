@@ -79,6 +79,10 @@ public class Webcrawling extends AbstractTableModel {
         return (int) millisLimit / 1000;
     }
 
+    public int getParsedPagesNumber() {
+        return urls.size();
+    }
+
     public void setSecondsLimit(int value) {
         if (value < 5 || value > 60) {
             throw new IndexOutOfBoundsException();

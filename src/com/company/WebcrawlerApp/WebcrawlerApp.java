@@ -30,6 +30,9 @@ public class WebcrawlerApp extends JFrame {
     private final JLabel elapsedSecondsNameLabel;
     private final JLabel elapsedSecondsLabel;
 
+    private final JLabel parsedPagesNumberNameLabel;
+    private final JLabel parsedPagesNumberLabel;
+
     private final JLabel urlTitleLabel;
     private final JTextField exportUrlTextField;
     private final JButton exportButton;
@@ -56,6 +59,10 @@ public class WebcrawlerApp extends JFrame {
 
         elapsedSecondsNameLabel = new JLabel("Elapsed seconds:");
         elapsedSecondsLabel = new JLabel("0");
+
+        parsedPagesNumberNameLabel = new JLabel("Parsed pages:");
+        parsedPagesNumberLabel = new JLabel("0");
+        parsedPagesNumberLabel.setName("ParsedLabel");
 
         urlTitleLabel = new JLabel();
         exportUrlTextField = new JTextField();
@@ -108,6 +115,9 @@ public class WebcrawlerApp extends JFrame {
 
         add(elapsedSecondsNameLabel, BorderLayout.LINE_START);
         add(elapsedSecondsLabel, BorderLayout.CENTER);
+
+        add(parsedPagesNumberNameLabel, BorderLayout.LINE_START);
+        add(parsedPagesNumberLabel, BorderLayout.CENTER);
 
         add(urlTitleLabel, BorderLayout.LINE_START);
         add(exportUrlTextField, BorderLayout.CENTER);
@@ -210,8 +220,10 @@ public class WebcrawlerApp extends JFrame {
         model.run(urlTextField.getText());
         long endMillis = System.currentTimeMillis();
 
-        int elapsedTime = (int)((endMillis - startMillis)/1000L);
+        int elapsedTime = (int) ((endMillis - startMillis) / 1000L);
         elapsedSecondsLabel.setText(String.valueOf(elapsedTime));
+
+        parsedPagesNumberLabel.setText(String.valueOf(model.getParsedPagesNumber()));
     }
 
     private void clickExportButton() {
