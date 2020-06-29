@@ -34,7 +34,7 @@ public class WebcrawlingThread extends Thread {
                 return;
             }
 
-            if (!urls.contains(currUrl)) {
+            if (isNotAdded(currUrl)) {
                 final String parsedHtmlCode = parseHtmlCode(currUrl);
                 final String currUrlTitle = parseTitleFromHtmlCode(parsedHtmlCode);
                 urls.add(currUrl);
@@ -58,4 +58,9 @@ public class WebcrawlingThread extends Thread {
     private boolean cannotRun(final String currUrl) {
         return currUrl == null
                 || processedUrls.contains(currUrl);
+}
+
+    private boolean isNotAdded(final String currUrl) {
+        return !urls.contains(currUrl);
+    }
 }
