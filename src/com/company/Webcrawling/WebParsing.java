@@ -65,10 +65,6 @@ public class WebParsing {
         return webpageTitle;
     }
 
-    public static @NotNull List<String> parseLinks(final @NotNull String url) {
-        return parseLinksFromHtmlCode(url, parseHtmlCode(url));
-    }
-
     public static @NotNull List<String> parseLinksFromHtmlCode(
             final @NotNull String baseUrl, final @NotNull String code) {
         List<String> urls = new ArrayList<>();
@@ -108,15 +104,4 @@ public class WebParsing {
         return urls;
     }
 
-    public static @NotNull List<String> parseUrlsTitles(final @NotNull List<String> urls) {
-        List<String> titles = new ArrayList<>();
-
-        for (String url : urls) {
-            titles.add(
-                    parseTitleFromHtmlCode(parseHtmlCode(url))
-            );
-        }
-
-        return titles;
-    }
 }
