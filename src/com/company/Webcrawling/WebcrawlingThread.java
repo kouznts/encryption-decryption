@@ -35,34 +35,38 @@ public class WebcrawlingThread extends Thread {
     public void run() {
         do {
             final String currUrl = processingUrls.poll();
-            if(cannotRun(currUrl)) {
+            if (cannotRun(currUrl)) {
                 return;
             }
 
-            if (isNotAdded(currUrl)) {
-                final String parsedHtmlCode = parseHtmlCode(currUrl);
-                final String currUrlTitle = parseTitleFromHtmlCode(parsedHtmlCode);
-                urls.add(currUrl);
-                urlsTitles.add(currUrlTitle);
+            final String parsedHtmlCode = parseHtmlCode(currUrl);
+            final String currUrlTitle = parseTitleFromHtmlCode(parsedHtmlCode);
 
-                final List<String> parsedLinks = parseLinksFromHtmlCode(currUrl, parsedHtmlCode);
-                String parsedLinkTitle;
-                for (String parsedLink : parsedLinks) {
-                    if (!urls.contains(parsedLink)) {
-                        parsedLinkTitle = parseTitle(parsedLink);
-                        urls.add(parsedLink);
-                        urlsTitles.add(parsedLinkTitle);
-                    }
+            final List<String> parsedLinks = parseLinksFromHtmlCode(currUrl, parsedHtmlCode);
+            String parsedLinkTitle;
+            for (String parsedLink : parsedLinks) {
+                if (!urls.contains(parsedLink)) {
+                    parsedLinkTitle = parseTitle(parsedLink);
+                    urls.add(parsedLink);
+                    urlsTitles.add(parsedLinkTitle);
                 }
-
-                processedUrls.add(currUrl);
             }
+
+            addCurrUrlIfIsNotAdded(currUrl, currUrlTitle);
+            processedUrls.add(currUrl);
         } while (!processingUrls.isEmpty());
     }
 
     private boolean cannotRun(final String currUrl) {
         return currUrl == null
                 || processedUrls.contains(currUrl);
+    }
+
+    private void addCurrUrlIfIsNotAdded(final String currUrl, final String currUrlTitle) {
+        if (isNotAdded(currUrl)) {
+            urls.add(currUrl);
+            urlsTitles.add(currUrlTitle);
+        }
     }
 
     private boolean isNotAdded(final String currUrl) {
