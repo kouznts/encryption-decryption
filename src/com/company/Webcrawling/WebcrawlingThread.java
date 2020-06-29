@@ -11,6 +11,7 @@ import static com.company.Webcrawling.Webcrawling.MAX_DEPTH_NUMBER;
 import static com.company.Webcrawling.Webcrawling.MIN_DEPTH_NUMBER;
 
 public class WebcrawlingThread extends Thread {
+
     private final Queue<String> tasks;
     private final Set<String> processedUrls;
 
@@ -62,7 +63,7 @@ public class WebcrawlingThread extends Thread {
 
             repeatTimes--;
         } while (!tasks.isEmpty()
-                && repeatTimes >= 0);
+                && repeatTimes > 0);
     }
 
     private void addUrlToUrlsIfIsNotAdded(final String url) {
