@@ -9,7 +9,7 @@ import java.util.Set;
 import static com.company.Webcrawling.WebParsing.*;
 
 public class WebcrawlingThread extends Thread {
-    private final Queue<String> processingUrls;
+    private final Queue<String> tasks;
     private final Set<String> processedUrls;
 
     private final List<String> urls;
@@ -19,10 +19,10 @@ public class WebcrawlingThread extends Thread {
 
     public WebcrawlingThread(
             @NotNull final List<String> urls, @NotNull final List<String> urlsTitles,
-            @NotNull final Queue<String> processingQueue, @NotNull final Set<String> processedUrls,
+            @NotNull final Queue<String> tasks, @NotNull final Set<String> processedUrls,
             final int depthNumber) {
 
-        this.processingUrls = processingQueue;
+        this.tasks = tasks;
         this.processedUrls = processedUrls;
 
         this.urls = urls;
@@ -34,7 +34,7 @@ public class WebcrawlingThread extends Thread {
     @Override
     public void run() {
         do {
-            final String currUrl = processingUrls.poll();
+            final String currUrl = tasks.poll();
             if (cannotRun(currUrl)) {
                 return;
             }
@@ -54,7 +54,7 @@ public class WebcrawlingThread extends Thread {
 
             addCurrUrlIfIsNotAdded(currUrl, currUrlTitle);
             processedUrls.add(currUrl);
-        } while (!processingUrls.isEmpty());
+        } while (!tasks.isEmpty());
     }
 
     private boolean cannotRun(final String currUrl) {
