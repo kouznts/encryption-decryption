@@ -154,7 +154,7 @@ public class WebcrawlerApp extends JFrame {
 
     private void setDepthCheckBox() {
         depthCheckBox.setName("DepthCheckBox");
-        
+
         depthCheckBox.addChangeListener(ev -> {
             if (depthCheckBox.isSelected()) {
                 depthTextField.setEnabled(true);
@@ -178,8 +178,10 @@ public class WebcrawlerApp extends JFrame {
 
         secondsLimitCheckBox.addChangeListener(ev -> {
             if (secondsLimitCheckBox.isSelected()) {
+                model.setIsTimeLimited(true);
                 secondsLimitTextField.setEnabled(true);
             } else {
+                model.setIsTimeLimited(false);
                 secondsLimitTextField.setEnabled(false);
                 model.resetSecondsLimit();
                 secondsLimitTextField.setText(String.valueOf(model.getSecondsLimit()));
@@ -225,7 +227,13 @@ public class WebcrawlerApp extends JFrame {
 
         model.setCrawlingThreadsNumber(Integer.parseInt(threadsTextField.getText()));
         model.setDepthNumber(Integer.parseInt(depthTextField.getText()));
-        model.setSecondsLimit(Integer.parseInt(secondsLimitTextField.getText()));
+        if (secondsLimitCheckBox.isSelected()) {
+            model.setIsTimeLimited(true);
+            model.setSecondsLimit(Integer.parseInt(secondsLimitTextField.getText()));
+        } else {
+            model.setIsTimeLimited(false);
+            secondsLimitTextField.setText(String.valueOf(model.getSecondsLimit()));
+        }
 
         long startMillis = System.currentTimeMillis();
         model.run(urlTextField.getText());

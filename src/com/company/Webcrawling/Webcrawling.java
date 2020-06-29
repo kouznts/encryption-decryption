@@ -20,6 +20,8 @@ public class Webcrawling extends AbstractTableModel {
     public static final int MAX_DEPTH_NUMBER = 16384;
     public static final int DEFAULT_DEPTH_NUMBER = MIN_DEPTH_NUMBER;
 
+    public static final int MIN_MILLIS_LIMIT = 0;
+    public static final int MAX_MILLIS_LIMIT = 65536;
     public static final int DEFAULT_MILLIS_LIMIT = 20000;
 
     private final String[] tableHeaders;
@@ -28,6 +30,8 @@ public class Webcrawling extends AbstractTableModel {
 
     private int crawlingThreadsNumber;
     private int depthNumber;
+
+    private boolean isTimeLimited;
     private long millisLimit;
 
     public Webcrawling() {
@@ -39,6 +43,8 @@ public class Webcrawling extends AbstractTableModel {
 
         crawlingThreadsNumber = 1;
         depthNumber = DEFAULT_DEPTH_NUMBER;
+
+        isTimeLimited = false;
         millisLimit = DEFAULT_MILLIS_LIMIT;
     }
 
@@ -64,18 +70,6 @@ public class Webcrawling extends AbstractTableModel {
         return tableHeaders[columnIndex];
     }
 
-    public int getSecondsLimit() {
-        return (int) millisLimit / 1000;
-    }
-
-    public void setSecondsLimit(int value) {
-        if (value < 5 || value > 60) {
-            throw new IndexOutOfBoundsException();
-        }
-
-        millisLimit = value * 1000;
-    }
-
     public int getParsedPagesNumber() {
         return urls.size();
     }
@@ -98,6 +92,24 @@ public class Webcrawling extends AbstractTableModel {
         }
 
         depthNumber = value;
+    }
+
+    public int getSecondsLimit() {
+        return (int) millisLimit / 1000;
+    }
+
+    public void setSecondsLimit(int value) {
+        final int valueInMillis = value * 1000;
+
+        if (valueInMillis < MIN_MILLIS_LIMIT || valueInMillis > MAX_MILLIS_LIMIT) {
+            throw new IndexOutOfBoundsException();
+        }
+
+        millisLimit = valueInMillis;
+    }
+
+    public void setIsTimeLimited(boolean value) {
+        isTimeLimited = value;
     }
 
     public void resetDepthNumber() {
@@ -138,7 +150,11 @@ public class Webcrawling extends AbstractTableModel {
 
         for (Thread thread : threads) {
             try {
-                thread.join();
+                if (isTimeLimited) {
+                    thread.join(millisLimit);
+                } else {
+                    thread.join();
+                }
             } catch (InterruptedException exc) {
                 exc.printStackTrace();
             }
