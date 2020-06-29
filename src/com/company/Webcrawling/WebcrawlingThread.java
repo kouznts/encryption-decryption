@@ -52,24 +52,25 @@ public class WebcrawlingThread extends Thread {
                 }
             }
 
-            addCurrUrlIfIsNotAdded(currUrl, currUrlTitle);
+            addCurrUrlToUrlsIfIsNotAdded(currUrl, currUrlTitle);
             processedUrls.add(currUrl);
         } while (!tasks.isEmpty());
     }
 
-    private boolean cannotRun(final String currUrl) {
-        return currUrl == null
-                || processedUrls.contains(currUrl);
+    private boolean cannotRun(final String url) {
+        return url == null
+                || processedUrls.contains(url);
     }
 
-    private void addCurrUrlIfIsNotAdded(final String currUrl, final String currUrlTitle) {
-        if (isNotAdded(currUrl)) {
-            urls.add(currUrl);
-            urlsTitles.add(currUrlTitle);
+    private void addCurrUrlToUrlsIfIsNotAdded(final String url, final String urlTitle) {
+        if (isNotAddedToUrls(url)) {
+            urls.add(url);
+            urlsTitles.add(urlTitle);
         }
     }
 
-    private boolean isNotAdded(final String currUrl) {
-        return !urls.contains(currUrl);
+    private boolean isNotAddedToUrls(final String url) {
+        return !urls.contains(url);
     }
+
 }
