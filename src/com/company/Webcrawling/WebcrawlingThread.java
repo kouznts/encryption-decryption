@@ -15,15 +15,20 @@ public class WebcrawlingThread extends Thread {
     private final List<String> urls;
     private final List<String> urlsTitles;
 
+    private final int depthNumber;
+
     public WebcrawlingThread(
             @NotNull final List<String> urls, @NotNull final List<String> urlsTitles,
-            @NotNull final Queue<String> processingQueue, @NotNull final Set<String> processedUrls) {
+            @NotNull final Queue<String> processingQueue, @NotNull final Set<String> processedUrls,
+            final int depthNumber) {
 
         this.processingUrls = processingQueue;
         this.processedUrls = processedUrls;
 
         this.urls = urls;
         this.urlsTitles = urlsTitles;
+
+        this.depthNumber = depthNumber;
     }
 
     @Override
@@ -58,7 +63,7 @@ public class WebcrawlingThread extends Thread {
     private boolean cannotRun(final String currUrl) {
         return currUrl == null
                 || processedUrls.contains(currUrl);
-}
+    }
 
     private boolean isNotAdded(final String currUrl) {
         return !urls.contains(currUrl);

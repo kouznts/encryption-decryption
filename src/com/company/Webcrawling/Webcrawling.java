@@ -122,7 +122,11 @@ public class Webcrawling extends AbstractTableModel {
 
         Thread[] threads = new Thread[crawlingThreadsNumber];
         for (int i = 0; i < threads.length; i++) {
-            threads[i] = new WebcrawlingThread(urls, urlsTitles, processingUrls, processedUrls);
+            threads[i] = new WebcrawlingThread(
+                    urls, urlsTitles,
+                    processingUrls, processedUrls,
+                    depthNumber
+            );
             threads[i].start();
         }
 
