@@ -44,10 +44,8 @@ public class WebcrawlingThread extends Thread {
                 urlsTitles.add(currUrlTitle);
 
                 final List<String> parsedLinks = parseLinksFromHtmlCode(currUrl, parsedHtmlCode);
-                String parsedLink;
                 String parsedLinkTitle;
-                for (String link : parsedLinks) {
-                    parsedLink = link;
+                for (String parsedLink : parsedLinks) {
                     if (!urls.contains(parsedLink)) {
                         parsedLinkTitle = parseTitle(parsedLink);
                         urls.add(parsedLink);
