@@ -7,6 +7,8 @@ import java.util.Queue;
 import java.util.Set;
 
 import static com.company.Webcrawling.WebParsing.*;
+import static com.company.Webcrawling.Webcrawling.MAX_DEPTH_NUMBER;
+import static com.company.Webcrawling.Webcrawling.MIN_DEPTH_NUMBER;
 
 public class WebcrawlingThread extends Thread {
     private final Queue<String> tasks;
@@ -22,6 +24,11 @@ public class WebcrawlingThread extends Thread {
             @NotNull final Queue<String> tasks, @NotNull final Set<String> processedUrls,
             final int depthNumber) {
 
+        if (depthNumber < MIN_DEPTH_NUMBER
+                || depthNumber > MAX_DEPTH_NUMBER) {
+            throw new IndexOutOfBoundsException();
+        }
+
         this.tasks = tasks;
         this.processedUrls = processedUrls;
 
@@ -33,6 +40,7 @@ public class WebcrawlingThread extends Thread {
 
     @Override
     public void run() {
+        int repeatTimes = depthNumber;
         do {
             final String currUrl = tasks.poll();
             if (cannotRun(currUrl)) {
@@ -45,7 +53,10 @@ public class WebcrawlingThread extends Thread {
 
             addUrlToUrlsIfIsNotAdded(currUrl);
             processedUrls.add(currUrl);
-        } while (!tasks.isEmpty());
+
+            repeatTimes--;
+        } while (!tasks.isEmpty()
+                && repeatTimes >= 0);
     }
 
     private boolean cannotRun(final String url) {

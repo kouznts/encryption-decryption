@@ -93,7 +93,7 @@ public class Webcrawling extends AbstractTableModel {
 
         depthNumber = value;
     }
-    
+
     public void resetSecondsLimit() {
         millisLimit = DEFAULT_MILLIS_LIMIT;
     }
@@ -105,11 +105,7 @@ public class Webcrawling extends AbstractTableModel {
         processingQueue.offer(startUrl);
         Set<String> processedUrls = new CopyOnWriteArraySet<>();
 
-        for (int i = 0; i < depthNumber; i++) {
-            createAndStartCrawlingThreads(processingQueue, processedUrls);
-            processingQueue.clear();
-            addUnprocessedUrlsToProcessingQueue(processingQueue, processedUrls);
-        }
+        createAndStartCrawlingThreads(processingQueue, processedUrls);
     }
 
     private void clear() {
