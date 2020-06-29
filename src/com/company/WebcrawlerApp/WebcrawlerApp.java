@@ -14,7 +14,7 @@ public class WebcrawlerApp extends JFrame {
 
     private final JLabel urlLabel;
     private final JTextField urlTextField;
-    private final JButton runButton;
+    private final JToggleButton runButton;
 
     private final JLabel threadsLabel;
     private final JTextField threadsTextField;
@@ -44,7 +44,7 @@ public class WebcrawlerApp extends JFrame {
 
         urlLabel = new JLabel("URL:");
         urlTextField = new JTextField();
-        runButton = new JButton("Run");
+        runButton = new JToggleButton("Run");
 
         threadsLabel = new JLabel("Threads:");
         threadsTextField = new JTextField();
@@ -207,6 +207,7 @@ public class WebcrawlerApp extends JFrame {
     }
 
     private void clickRunButton() {
+        runButton.setSelected(true);
         elapsedSecondsLabel.setText("0");
         urlTitleLabel.setText(
                 parseTitleFromHtmlCode(parseHtmlCode(urlTextField.getText()))
@@ -225,6 +226,7 @@ public class WebcrawlerApp extends JFrame {
 
         model.removeUrlsWithoutTitles();
         parsedPagesNumberLabel.setText(String.valueOf(model.getParsedPagesNumber()));
+        runButton.setSelected(false);
     }
 
     private void clickExportButton() {
