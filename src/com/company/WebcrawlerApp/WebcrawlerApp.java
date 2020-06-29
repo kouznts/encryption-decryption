@@ -154,10 +154,16 @@ public class WebcrawlerApp extends JFrame {
 
     private void setDepthCheckBox() {
         depthCheckBox.setName("DepthCheckBox");
-
-        depthCheckBox.addChangeListener(ev ->
-                depthTextField.setEnabled(depthCheckBox.isSelected())
-        );
+        
+        depthCheckBox.addChangeListener(ev -> {
+            if (depthCheckBox.isSelected()) {
+                depthTextField.setEnabled(true);
+            } else {
+                depthTextField.setEnabled(false);
+                model.resetDepthNumber();
+                depthTextField.setText(String.valueOf(model.getDepthNumber()));
+            }
+        });
     }
 
     private void setSecondsLimitTextField(final int width, final int height) {
@@ -168,6 +174,8 @@ public class WebcrawlerApp extends JFrame {
     }
 
     private void setSecondsLimitCheckBox() {
+        secondsLimitCheckBox.setName("SecondsCheckBox");
+
         secondsLimitCheckBox.addChangeListener(ev -> {
             if (secondsLimitCheckBox.isSelected()) {
                 secondsLimitTextField.setEnabled(true);
