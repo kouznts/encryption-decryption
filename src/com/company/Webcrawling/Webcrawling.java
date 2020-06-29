@@ -135,17 +135,6 @@ public class Webcrawling extends AbstractTableModel {
         }
     }
 
-    private void addUnprocessedUrlsToProcessingQueue(
-            final @NotNull Queue<String> processingUrls, final @NotNull Set<String> processedUrls
-    ) {
-        String currUrl;
-        for (String url : urls) {
-            currUrl = url;
-            if (!processedUrls.contains(currUrl))
-                processingUrls.add(currUrl);
-        }
-    }
-
     public void removeUrlsWithoutTitles() {
         List<Integer> removingUrlsIndexes = new ArrayList<>();
 
