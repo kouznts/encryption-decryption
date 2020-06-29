@@ -17,7 +17,7 @@ import java.util.concurrent.CopyOnWriteArraySet;
 public class Webcrawling extends AbstractTableModel {
 
     public static final int MIN_DEPTH_NUMBER = 1;
-    public static final int MAX_DEPTH_NUMBER = 16384;
+    public static final int MAX_DEPTH_NUMBER = 131072;
     public static final int DEFAULT_DEPTH_NUMBER = MIN_DEPTH_NUMBER;
 
     public static final int MIN_MILLIS_LIMIT = 0;

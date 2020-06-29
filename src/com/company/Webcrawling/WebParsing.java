@@ -13,6 +13,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class WebParsing {
+
     public static @NotNull String parseHtmlCode(final @NotNull String url) {
         String webpageHtmlCode = "";
 
@@ -102,5 +103,4 @@ public class WebParsing {
 
         return urls;
     }
-
 }
