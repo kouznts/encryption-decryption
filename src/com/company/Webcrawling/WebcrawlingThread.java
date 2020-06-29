@@ -43,13 +43,19 @@ public class WebcrawlingThread extends Thread {
         int repeatTimes = depthNumber;
         do {
             final String currUrl = tasks.poll();
-            if (cannotRun(currUrl)) {
+            if (currUrl == null
+                    || processedUrls.contains(currUrl)) {
                 return;
             }
 
             final String parsedHtmlCode = parseHtmlCode(currUrl);
             final List<String> parsedLinks = parseLinksFromHtmlCode(currUrl, parsedHtmlCode);
-            addParsedLinksToUrlsAndTasksIfAreNotAdded(parsedLinks);
+            for (String link : parsedLinks) {
+                addUrlToUrlsIfIsNotAdded(link);
+                if (!processedUrls.contains(link)) {
+                    tasks.offer(link);
+                }
+            }
 
             addUrlToUrlsIfIsNotAdded(currUrl);
             processedUrls.add(currUrl);
@@ -59,34 +65,12 @@ public class WebcrawlingThread extends Thread {
                 && repeatTimes >= 0);
     }
 
-    private boolean cannotRun(final String url) {
-        return url == null
-                || processedUrls.contains(url);
-    }
-
     private void addUrlToUrlsIfIsNotAdded(final String url) {
         String urlTitle;
-        if (isNotAddedToUrls(url)) {
+        if (!urls.contains(url)) {
             urlTitle = parseTitle(url);
             urls.add(url);
             urlsTitles.add(urlTitle);
-        }
-    }
-
-    private boolean isNotAddedToUrls(final String url) {
-        return !urls.contains(url);
-    }
-
-    private void addParsedLinksToUrlsAndTasksIfAreNotAdded(final List<String> links) {
-        for (String link : links) {
-            addUrlToUrlsIfIsNotAdded(link);
-            addUrlToTaskIfIsNotProcessed(link);
-        }
-    }
-
-    private void addUrlToTaskIfIsNotProcessed(final String url) {
-        if (!processedUrls.contains(url)) {
-            tasks.offer(url);
         }
     }
 }
