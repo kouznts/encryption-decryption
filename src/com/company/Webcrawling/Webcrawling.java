@@ -59,6 +59,14 @@ public class Webcrawling extends AbstractTableModel {
         return tableHeaders[columnIndex];
     }
 
+    public int getSecondsLimit() {
+        return (int) millisLimit / 1000;
+    }
+
+    public int getParsedPagesNumber() {
+        return urls.size();
+    }
+
     public void setCrawlingThreadsNumber(int value) {
         if (value <= 0 || value > 8) {
             throw new IndexOutOfBoundsException();
@@ -73,14 +81,6 @@ public class Webcrawling extends AbstractTableModel {
         }
 
         depthNumber = value;
-    }
-
-    public int getSecondsLimit() {
-        return (int) millisLimit / 1000;
-    }
-
-    public int getParsedPagesNumber() {
-        return urls.size();
     }
 
     public void setSecondsLimit(int value) {
