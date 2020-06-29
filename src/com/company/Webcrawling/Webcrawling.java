@@ -15,6 +15,9 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.CopyOnWriteArraySet;
 
 public class Webcrawling extends AbstractTableModel {
+    public static final int MIN_DEPTH_NUMBER = 1;
+    public static final int MAX_DEPTH_NUMBER = 4;
+
     public static final int DEFAULT_MILLIS_LIMIT = 20000;
 
     private final String[] tableHeaders;
@@ -33,7 +36,7 @@ public class Webcrawling extends AbstractTableModel {
         urlsTitles = new CopyOnWriteArrayList<>();
 
         crawlingThreadsNumber = 1;
-        depthNumber = 1;
+        depthNumber = MIN_DEPTH_NUMBER;
         millisLimit = DEFAULT_MILLIS_LIMIT;
     }
 
@@ -76,7 +79,7 @@ public class Webcrawling extends AbstractTableModel {
     }
 
     public void setDepthNumber(int value) {
-        if (value <= 0 || value > 4) {
+        if (value < MIN_DEPTH_NUMBER || value > MAX_DEPTH_NUMBER) {
             throw new IndexOutOfBoundsException();
         }
 
