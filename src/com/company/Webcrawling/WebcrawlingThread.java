@@ -30,10 +30,7 @@ public class WebcrawlingThread extends Thread {
     public void run() {
         do {
             final String currUrl = processingUrls.poll();
-            if (currUrl == null) {
-                return;
-            }
-            if (processedUrls.contains(currUrl)) {
+            if(cannotRun(currUrl)) {
                 return;
             }
 
@@ -57,4 +54,8 @@ public class WebcrawlingThread extends Thread {
             }
         } while (!processingUrls.isEmpty());
     }
+
+    private boolean cannotRun(final String currUrl) {
+        return currUrl == null
+                || processedUrls.contains(currUrl);
 }
