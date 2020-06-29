@@ -5,9 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLConnection;
+import java.net.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +17,7 @@ public class WebParsing {
         String webpageHtmlCode = "";
 
         try {
+            CookieHandler.setDefault(new CookieManager(null, CookiePolicy.ACCEPT_ALL));
             URLConnection urlConnection = new URL(url).openConnection();
             if (urlConnection != null) {
                 urlConnection.setRequestProperty("User-Agent",
