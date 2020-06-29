@@ -66,6 +66,14 @@ public class Webcrawling extends AbstractTableModel {
         return (int) millisLimit / 1000;
     }
 
+    public void setSecondsLimit(int value) {
+        if (value < 5 || value > 60) {
+            throw new IndexOutOfBoundsException();
+        }
+
+        millisLimit = value * 1000;
+    }
+
     public int getParsedPagesNumber() {
         return urls.size();
     }
@@ -86,14 +94,6 @@ public class Webcrawling extends AbstractTableModel {
         depthNumber = value;
     }
     
-    public void setSecondsLimit(int value) {
-        if (value < 5 || value > 60) {
-            throw new IndexOutOfBoundsException();
-        }
-
-        millisLimit = value * 1000;
-    }
-
     public void resetSecondsLimit() {
         millisLimit = DEFAULT_MILLIS_LIMIT;
     }
