@@ -153,6 +153,8 @@ public class WebcrawlerApp extends JFrame {
     }
 
     private void setDepthCheckBox() {
+        depthCheckBox.setName("DepthCheckBox");
+
         depthCheckBox.addChangeListener(ev ->
                 depthTextField.setEnabled(depthCheckBox.isSelected())
         );

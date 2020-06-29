@@ -1,6 +1,7 @@
 package com.company.WebcrawlerApp;
 
 public class WebcrawlerAppSettings {
+
     public static final int DEFAULT_FRAME_WIDTH = 500;
     public static final int DEFAULT_FRAME_HEIGHT = 600;
 
