@@ -82,7 +82,7 @@ public class Webcrawling extends AbstractTableModel {
 
         depthNumber = value;
     }
-
+    
     public void setSecondsLimit(int value) {
         if (value < 5 || value > 60) {
             throw new IndexOutOfBoundsException();
@@ -161,10 +161,13 @@ public class Webcrawling extends AbstractTableModel {
 
     public void export(final @NotNull String exportFileName) {
         try (PrintWriter fileWriter = new PrintWriter(exportFileName, StandardCharsets.UTF_8)) {
-            for (int i = 0; i < urls.size(); i++) {
+            final int lastIndex = urls.size() - 1;
+            for (int i = 0; i < lastIndex; i++) {
                 fileWriter.println(urls.get(i));
                 fileWriter.println(urlsTitles.get(i));
             }
+            fileWriter.println(urls.get(lastIndex));
+            fileWriter.print(urlsTitles.get(lastIndex));
         } catch (IOException exc) {
             exc.printStackTrace();
         }
