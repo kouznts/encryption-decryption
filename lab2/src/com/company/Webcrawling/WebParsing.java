@@ -19,6 +19,7 @@ public class WebParsing {
 
         try {
             CookieHandler.setDefault(new CookieManager(null, CookiePolicy.ACCEPT_ALL));
+            HttpURLConnection.setFollowRedirects(false);
             URLConnection urlConnection = new URL(url).openConnection();
             if (urlConnection != null) {
                 urlConnection.setRequestProperty("User-Agent",

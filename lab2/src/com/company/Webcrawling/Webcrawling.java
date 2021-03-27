@@ -170,7 +170,7 @@ public class Webcrawling extends AbstractTableModel {
             }
         }
 
-        for (int i = 0, deletingIndex; i < removingUrlsIndexes.size(); i++) {
+        for (int i = 0, deletingIndex; i < removingUrlsIndexes.size() - 1; i++) {
             deletingIndex = removingUrlsIndexes.get(i);
             urls.remove(deletingIndex);
             urlsTitles.remove(deletingIndex);
